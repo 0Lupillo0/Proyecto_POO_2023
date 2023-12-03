@@ -25,7 +25,7 @@ public class Utilidades {
     /**
      * Este método imprime el menu para capturar los datos de un nuevo registro en el sistema
      */
-   public static void menuNuevoRegistro(){
+    public static void menuNuevoRegistro(){
         System.out.println("----NUEVO REGISTRO----");
         boolean passwordsIguales = false;
         boolean datosCorrectos = false;
@@ -97,13 +97,11 @@ public class Utilidades {
             } else if (tipoDeCuenta.equalsIgnoreCase("Administrador")) {
                 registroValido = true;
                 System.out.println("Se registrara un administrador.");
-                System.out.println("Ingresa un ID para el nuevo administrador:");
-                String idAdministrador = scanner.nextLine();
-                Administrador nuevoAdministrador = new Administrador(nombre, apellidoPaterno, apellidoMaterno, edad, correo, numeroCelular, direccion, nickname, password2, idAdministrador);
+                Administrador nuevoAdministrador = new Administrador(nombre, apellidoPaterno, apellidoMaterno, edad, correo, numeroCelular, direccion, nickname, password2);
                 EscritorDeArchivos.escribirAdministrador(nuevoAdministrador);
             } else {
                 registroValido = false;
-                System.out.println("Opción no valida de registro, intenta de nuevo.");
+                System.out.println("Opción de registro no valida, intenta de nuevo.");
             }
         }
     }
@@ -112,15 +110,55 @@ public class Utilidades {
      * Este método imprime el menu para ingresar al sistema con un nickname y una contraseña registrados.
      */
     public static void menuIngresar(){
-        System.out.println("----INGRESAR----");
-        System.out.println("Ingresar como:");
-        System.out.println("- Cliente");
-        System.out.println("- Administrador");
-        String opcionMenuIngresar = scanner.nextLine();
-        if(opcionMenuIngresar.equalsIgnoreCase("Cliente")){
-            System.out.println("----CLIENTE----");
-        } else if (opcionMenuIngresar.equalsIgnoreCase("Administrador")) {
-            System.out.println("----ADMINISTRADOR----");
+        String nickname;
+        String password;
+        boolean ingresoValido = false;
+        boolean datosCorrectosCliente = false;
+        boolean datosCorrectosAdministrador = false;
+        while(!ingresoValido){
+            System.out.println("----INGRESAR----");
+            System.out.println("Ingresar como:");
+            System.out.println("- Cliente");
+            System.out.println("- Administrador");
+            String opcionMenuIngresar = scanner.nextLine();
+            if(opcionMenuIngresar.equalsIgnoreCase("Cliente")){
+                ingresoValido = true;
+                while(!datosCorrectosCliente){
+                    System.out.println("----CLIENTE----");
+                    System.out.println("Ingresa tu nickname:");
+                    nickname = scanner.nextLine();
+                    System.out.println("Ingresa tu contraseña:");
+                    password = scanner.nextLine();
+                    boolean encontrado = LectorDeArchivos.buscaNickPassClientes(nickname, password);
+                    if(encontrado){
+                        datosCorrectosCliente = true;
+                        System.out.println("Bienvenido " + nickname);
+                    } else{
+                        datosCorrectosCliente = false;
+                        System.out.println("Nickname y/o contraseña no encontrados.");
+                    }
+                }
+            } else if (opcionMenuIngresar.equalsIgnoreCase("Administrador")) {
+                ingresoValido = true;
+                while (!datosCorrectosAdministrador) {
+                    System.out.println("----ADMINISTRADOR----");
+                    System.out.println("Ingresa tu nickname: ");
+                    nickname = scanner.nextLine();
+                    System.out.println("Ingresa tu contraseña:");
+                    password = scanner.nextLine();
+                    boolean encontrado = LectorDeArchivos.buscaNickPassAdmins(nickname, password);
+                    if (encontrado) {
+                        datosCorrectosAdministrador = true;
+                        System.out.println("Bienvenido " + nickname);
+                    } else {
+                        datosCorrectosAdministrador = false;
+                        System.out.println("Nickname y/o contraseña no encontrados.");
+                    }
+                }
+            } else{
+                ingresoValido = false;
+                System.out.println("Opción de ingreso no valida, intenta de nuevo.");
+            }
         }
     }
 

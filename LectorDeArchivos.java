@@ -19,8 +19,8 @@ public class LectorDeArchivos {
                     i++;
                 }
                 //Estas líneas sirven solo para comprobar que si se está revisando el nickname y el password.
-                System.out.println(datos[8]);
-                System.out.println(datos[9]);
+                //System.out.println(datos[8]);
+                //System.out.println(datos[9]);
                 if(datos[8].equalsIgnoreCase(nickname) && datos[9].equalsIgnoreCase(password)){
                     encontradoClientes = true;
                 }
@@ -40,7 +40,7 @@ public class LectorDeArchivos {
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
             while(lineaLeida != null){
-                String[] datos = new String[11];
+                String[] datos = new String[10];
                 int i = 0;
                 StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
                 while(particion.hasMoreTokens()){
@@ -48,8 +48,8 @@ public class LectorDeArchivos {
                     i++;
                 }
                 //Estas líneas sirven solo para comprobar que si se está revisando el nickname y el password.
-                System.out.println(datos[8]);
-                System.out.println(datos[9]);
+                //System.out.println(datos[8]);
+                //System.out.println(datos[9]);
                 if(datos[8].equalsIgnoreCase(nickname) && datos[9].equalsIgnoreCase(password)){
                     encontradoAdmins = true;
                 }
