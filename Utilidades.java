@@ -25,14 +25,15 @@ public class Utilidades {
     /**
      * Este método imprime el menu para capturar los datos de un nuevo registro en el sistema
      */
-    public static void menuNuevoRegistro(){
+   public static void menuNuevoRegistro(){
         System.out.println("----NUEVO REGISTRO----");
         boolean passwordsIguales = false;
         boolean datosCorrectos = false;
-        boolean coincidenciaNickPass = false;
+        boolean coincidenciaNickPass = true;
         String nombre = null, apellidoPaterno = null, apellidoMaterno = null, correo = null, numeroCelular = null, direccion = null, nickname = null, password1 = null, password2 = null;
         int edad = 0;
-        while(!datosCorrectos){
+        //Este proceso consta de 3 filtros para realizar el registro de un nuevo administrados o usuario.
+        while(!passwordsIguales || !datosCorrectos || coincidenciaNickPass){
             System.out.println("Ingresa tu nombre: ");
             nombre = scanner.nextLine();
             System.out.println("Ingresa tu apellido paterno: ");
@@ -48,48 +49,62 @@ public class Utilidades {
             numeroCelular = scanner.nextLine();
             System.out.println("Ingresa una dirección:");
             direccion = scanner.nextLine();
-            System.out.println("¿Los datos ingresados son correctos?");
-            System.out.println("Si - No");
-            String validacionDatos = scanner.nextLine();
-            if(validacionDatos.equalsIgnoreCase("Si")){
-                datosCorrectos = true;
-            } else if (validacionDatos.equalsIgnoreCase("No")) {
-                datosCorrectos = false;
-                System.out.println("Entendido, reingresa los datos.");
-            }
-        }
-        while(!passwordsIguales){
             System.out.println("Ingresa un nickname:");
             nickname = scanner.nextLine();
             System.out.println("Ingresa una contraseña:");
             password1 = scanner.nextLine();
             System.out.println("Confirma la contraseña ingresándola otra vez");
             password2 = scanner.nextLine();
+            //Primer filtro, confirmación de contraseñas.
             if(password1.equals(password2)){
                 passwordsIguales = true;
-                //La idea seria meter el filtro para revisar que el nickname y la contraseña no esten ya registrados. Se podria hacer un if que evalue el valor de los boolean de abajo, los metodos retornan valores booleanos.
                 boolean nickPassClientes = LectorDeArchivos.buscaNickPassClientes(nickname, password2);
                 boolean nickPassAdmins = LectorDeArchivos.buscaNickPassAdmins(nickname, password2);
-                Utilidades.impresionDeDatosMenu(nombre, apellidoPaterno, apellidoMaterno, edad, correo, numeroCelular, direccion, nickname, password2);
+                //Segundo filtro, verificación de nickname y password ya registrados en el sistema.
+                if (nickPassClientes || nickPassAdmins) {
+                    coincidenciaNickPass = true;
+                    System.out.println("El nickname y la contraseña ya existen en el sistema. Por favor, elige otros.");
+                } else {
+                    coincidenciaNickPass = false;
+                    Utilidades.impresionDeDatosMenu(nombre, apellidoPaterno, apellidoMaterno, edad, correo, numeroCelular, direccion, nickname, password2);
+                    System.out.println("¿Los datos ingresados son correctos?");
+                    System.out.println("Si - No");
+                    String validacionDatos = scanner.nextLine();
+                    //Tercer filtro, validación de datos por parte del usuario.
+                    if(validacionDatos.equalsIgnoreCase("Si")){
+                        datosCorrectos = true;
+                    } else if (validacionDatos.equalsIgnoreCase("No")) {
+                        datosCorrectos = false;
+                        System.out.println("Entendido, reingresa los datos.");
+                    }
+                }
             } else{
                 passwordsIguales = false;
                 System.out.println("Las contraseñas no coinciden.");
-                System.out.println("Vuelve a intentarlo.");
+                System.out.println("Reingresa los datos.");
             }
         }
-        System.out.println("¿Los datos ingresados corresponden a un cliente o a un administrador?");
-        String tipoDeCuenta = scanner.nextLine();
-        if(tipoDeCuenta.equalsIgnoreCase("Cliente")){
-            System.out.println("Se registrara un cliente.");
-            Cliente nuevoCliente = new Cliente(nombre, apellidoPaterno, apellidoMaterno, edad, correo, numeroCelular, direccion, nickname, password2);
-            EscritorDeArchivos.escribirCliente(nuevoCliente);
+        boolean registroValido = false;
+        while(!registroValido){
+            System.out.println("¿Los datos ingresados corresponden a un cliente o a un administrador?");
+            String tipoDeCuenta = scanner.nextLine();
+            if(tipoDeCuenta.equalsIgnoreCase("Cliente")){
+                registroValido = true;
+                System.out.println("Se registrara un cliente.");
+                Cliente nuevoCliente = new Cliente(nombre, apellidoPaterno, apellidoMaterno, edad, correo, numeroCelular, direccion, nickname, password2);
+                EscritorDeArchivos.escribirCliente(nuevoCliente);
 
-        } else if (tipoDeCuenta.equalsIgnoreCase("Administrador")) {
-            System.out.println("Se registrara un administrador.");
-            System.out.println("Ingresa un ID para el nuevo administrador:");
-            String idAdministrador = scanner.nextLine();
-            Administrador nuevoAdministrador = new Administrador(nombre, apellidoPaterno, apellidoMaterno, edad, correo, numeroCelular, direccion, nickname, password2, idAdministrador);
-            EscritorDeArchivos.escribirAdministrador(nuevoAdministrador);
+            } else if (tipoDeCuenta.equalsIgnoreCase("Administrador")) {
+                registroValido = true;
+                System.out.println("Se registrara un administrador.");
+                System.out.println("Ingresa un ID para el nuevo administrador:");
+                String idAdministrador = scanner.nextLine();
+                Administrador nuevoAdministrador = new Administrador(nombre, apellidoPaterno, apellidoMaterno, edad, correo, numeroCelular, direccion, nickname, password2, idAdministrador);
+                EscritorDeArchivos.escribirAdministrador(nuevoAdministrador);
+            } else {
+                registroValido = false;
+                System.out.println("Opción no valida de registro, intenta de nuevo.");
+            }
         }
     }
 
