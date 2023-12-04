@@ -2,7 +2,7 @@ import java.io.*;
 public class EscritorDeArchivos {
     public static void escribirCliente(Cliente cliente){
         try{
-            File archivo = new File("RegistroClientes.txt");
+            File archivo = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\RegistroClientes.txt");
             FileWriter escritor = new FileWriter(archivo, true);
             PrintWriter objetoEscritor = new PrintWriter(escritor);
             String cadena = "cliente:";
@@ -33,7 +33,7 @@ public class EscritorDeArchivos {
 
     public static void escribirAdministrador(Administrador administrador){
         try{
-            File archivo = new File("RegistroAdministradores.txt");
+            File archivo = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\RegistroAdministradores.txt");
             FileWriter escritor = new FileWriter(archivo, true);
             PrintWriter objetoEscritor = new PrintWriter(escritor);
             String cadena = "administrador:";
@@ -54,9 +54,7 @@ public class EscritorDeArchivos {
             String nickname = administrador.getNickname();
             cadena = cadena + nickname + ":";
             String password = administrador.getPassword();
-            cadena =  cadena + password + ":";
-            String idAdministrador = administrador.getIdAdministrador();
-            cadena = cadena + idAdministrador;
+            cadena =  cadena + password;
             objetoEscritor.println(cadena);
             objetoEscritor.close();
         } catch(IOException e){
