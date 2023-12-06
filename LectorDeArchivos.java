@@ -46,7 +46,7 @@ public class LectorDeArchivos {
                     datos[i] = particion.nextToken();
                     i++;
                 }
-                if(datos[8].equalsIgnoreCase(nickname) && datos[9].equalsIgnoreCase(password)){
+                if(datos[8].equals(nickname) && datos[9].equals(password)){
                     encontradoAdmins = true;
                 }
                 lineaLeida = bufferEntrada.readLine();
