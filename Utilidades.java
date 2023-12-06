@@ -1,3 +1,6 @@
+import jdk.jshell.execution.Util;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -7,6 +10,8 @@ import java.util.Scanner;
  */
 public class Utilidades {
     public static Scanner scanner = new Scanner(System.in);
+    public static ArrayList<Cliente> clientes = new ArrayList<>();
+    public static ArrayList<Administrador> administradores = new ArrayList<>();
     /**
      * Este método imprime el menu principal de la aplicación.
      * @return Valor entero para la sentencia switch que sigue a la llamada al método.
@@ -74,7 +79,6 @@ public class Utilidades {
                     if(validacionDatos.equalsIgnoreCase("Si")){
                         datosCorrectos = true;
                     } else if (validacionDatos.equalsIgnoreCase("No")) {
-                        datosCorrectos = false;
                         System.out.println("Entendido, reingresa los datos.");
                     }
                 }
@@ -93,14 +97,15 @@ public class Utilidades {
                 System.out.println("Se registrara un cliente.");
                 Cliente nuevoCliente = new Cliente(nombre, apellidoPaterno, apellidoMaterno, edad, correo, numeroCelular, direccion, nickname, password2);
                 EscritorDeArchivos.escribirCliente(nuevoCliente);
+                clientes.add(nuevoCliente);
 
             } else if (tipoDeCuenta.equalsIgnoreCase("Administrador")) {
                 registroValido = true;
                 System.out.println("Se registrara un administrador.");
                 Administrador nuevoAdministrador = new Administrador(nombre, apellidoPaterno, apellidoMaterno, edad, correo, numeroCelular, direccion, nickname, password2);
                 EscritorDeArchivos.escribirAdministrador(nuevoAdministrador);
+                administradores.add(nuevoAdministrador);
             } else {
-                registroValido = false;
                 System.out.println("Opción de registro no valida, intenta de nuevo.");
             }
         }
@@ -115,6 +120,7 @@ public class Utilidades {
         boolean ingresoValido = false;
         boolean datosCorrectosCliente = false;
         boolean datosCorrectosAdministrador = false;
+        LectorDeArchivos.llenarArraylistClientes(clientes);
         while(!ingresoValido){
             System.out.println("----INGRESAR----");
             System.out.println("Ingresar como:");
@@ -133,8 +139,13 @@ public class Utilidades {
                     if(encontrado){
                         datosCorrectosCliente = true;
                         System.out.println("Bienvenido " + nickname);
+                        for (Cliente actual : clientes) {
+                            if(actual.getNickname().equals(nickname) && actual.getPassword().equals(password)){
+                                menuCliente(actual);
+                            }
+                        }
+                        clientes.removeAll(clientes);
                     } else{
-                        datosCorrectosCliente = false;
                         System.out.println("Nickname y/o contraseña no encontrados.");
                     }
                 }
@@ -151,15 +162,47 @@ public class Utilidades {
                         datosCorrectosAdministrador = true;
                         System.out.println("Bienvenido " + nickname);
                     } else {
-                        datosCorrectosAdministrador = false;
                         System.out.println("Nickname y/o contraseña no encontrados.");
                     }
                 }
             } else{
-                ingresoValido = false;
                 System.out.println("Opción de ingreso no valida, intenta de nuevo.");
             }
         }
+    }
+
+    public static void menuCliente(Cliente cliente){
+        int opcionCliente;
+        do{
+            System.out.println("----CLIENTE----");
+            System.out.println("1. Registrar una mascota");
+            System.out.println("2. Reservar un servicio especial o combo para mascota");
+            System.out.println("3. Ver historial de servicio adquiridos");
+            System.out.println("4. Ver precios de servicios");
+            System.out.println("5. Salir de la sesión");
+            opcionCliente = scanner.nextInt();
+            scanner.nextLine();
+            switch(opcionCliente){
+                case 1:
+                    cliente.registrarUnaMascota();
+                    break;
+                case 2:
+                    LectorDeArchivos.cargarMascotasParaCliente(clientes);
+                    cliente.reservarServicio();
+                    break;
+                case 3:
+                    cliente.verHistorialDeServicios();
+                    break;
+                case 4:
+                    cliente.verPreciosDeServicios();
+                    break;
+                case 5:
+                    System.out.println("Cerrando sesión...");
+                    break;
+                default:
+                    System.out.println("Opción no válida, intenta de nuevo.");
+            }
+        }while(opcionCliente!=5);
     }
 
     public static void impresionDeDatosMenu(String nombre, String apellidoPaterno, String apellidoMaterno, int edad, String correo, String numeroCelular, String direccion, String nickname, String password){

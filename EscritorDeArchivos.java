@@ -61,4 +61,50 @@ public class EscritorDeArchivos {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    public static void escribirPerro(Perro perro, String nicknameDuenio){
+        try{
+            File archivo = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\RegistroMascotas.txt");
+            FileWriter escritor = new FileWriter(archivo,true);
+            PrintWriter objetoEscritor = new PrintWriter(escritor);
+            String cadena = nicknameDuenio + ":";
+            cadena = cadena + "perro:";
+            String nombreDelPerro = perro.getNombre();
+            cadena = cadena + nombreDelPerro + ":";
+            int edad = perro.getEdad();
+            cadena = cadena + edad + ":";
+            String tipoDePelo = perro.getTipoDePelo();
+            cadena = cadena + tipoDePelo + ":";
+            String altura = perro.getAltura();
+            cadena = cadena + altura;
+
+            objetoEscritor.println(cadena);
+            objetoEscritor.close();
+        }
+        catch(IOException e){
+            System.out.println(e.toString());
+        }
+    }
+
+    public static void escribirGato(Gato gato, String nicknameDuenio){
+        try{
+            File archivo = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\RegistroMascotas.txt");
+            FileWriter escritor = new FileWriter(archivo,true);
+            PrintWriter objetoEscritor = new PrintWriter(escritor);
+            String cadena = nicknameDuenio + ":";
+            cadena = cadena + "gato:";
+            String nombreDelGato = gato.getNombre();
+            cadena = cadena + nombreDelGato + ":";
+            int edad = gato.getEdad();
+            cadena = cadena + edad + ":";
+            String tipoDePelo = gato.getTipoDePelo();
+            cadena = cadena + tipoDePelo;
+
+            objetoEscritor.println(cadena);
+            objetoEscritor.close();
+        }
+        catch(IOException e){
+            System.out.println(e.toString());
+        }
+    }
 }

@@ -109,14 +109,4 @@ public abstract class Usuario {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
-    public void impresionDeDatos(){
-        System.out.println("Nombre completo: " + getNombre() + getApellidoPaterno() + getApellidoMaterno());
-        System.out.println("Edad: " + getEdad());
-        System.out.println("Correo electrónico: " + getMail());
-        System.out.println("Número celular:" + getNumeroCelular());
-        System.out.println("Dirección:" + getDireccion());
-        System.out.println("Nickname: " + getNickname());
-        System.out.println("Contraseña: " + getPassword());
-    }
 }

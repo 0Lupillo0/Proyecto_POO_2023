@@ -1,0 +1,2 @@
+cliente:Nicolás:Sarmiento:Monroy:20:nickisarmiento@gmail.com:5532674310:Calle 12 23:nicolaso24:apolo123
+cliente:Samuel:Ortiz:Dias:20:samuel.ortiz@gmail.com:5532687410:Calle Pizza 2:samuelo23:dominator123

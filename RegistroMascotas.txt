@@ -1,0 +1,5 @@
+nicolaso24:perro:Apolo:6:Pelo corto:Mediano
+nicolaso24:gato:Figaro:2:Pelo medio
+samuelo23:perro:Brutus:3:Pelo largo:Gigante
+samuelo23:gato:Messi:6:Pelo largo
+samuelo23:perro:Milaneso:1:Pelo corto:Mediano
