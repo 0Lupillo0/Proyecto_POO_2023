@@ -7,7 +7,7 @@ public class LectorDeArchivos {
     public static boolean buscaNickPassClientes(String nickname, String password){
         boolean encontradoClientes = false;
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\RegistroClientes.txt");
+            File archivoClientes = new File("RegistroClientes.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -34,7 +34,7 @@ public class LectorDeArchivos {
     public static boolean buscaNickPassAdmins(String nickname, String password){
         boolean encontradoAdmins = false;
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\RegistroAdministradores.txt");
+            File archivoClientes = new File("RegistroAdministradores.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -60,7 +60,7 @@ public class LectorDeArchivos {
 
     public static void llenarArraylistClientes(ArrayList<Cliente> clientes){
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\RegistroClientes.txt");
+            File archivoClientes = new File("RegistroClientes.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -94,6 +94,85 @@ public class LectorDeArchivos {
                 clientes.add(actual);
                 lineaLeida = bufferEntrada.readLine();
             }
+            bufferEntrada.close();
+        } catch (IOException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static void llenarArraylistAdministradores(ArrayList<Administrador> losAdmins){
+        try{
+            File archivoClientes = new File("RegistroAdministradores.txt");
+            FileReader lector = new FileReader(archivoClientes);
+            BufferedReader bufferEntrada = new BufferedReader(lector);
+            String lineaLeida = bufferEntrada.readLine();
+            while(lineaLeida != null){
+                Administrador actual = new Administrador();
+                StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
+                int datos = particion.countTokens();
+                for(int i = 0; i <= datos; i++){
+                    if(i == 0){
+                        particion.nextToken();
+                    } else if (i == 1) {
+                        actual.setNombre(particion.nextToken());
+                    } else if (i == 2){
+                        actual.setApellidoPaterno(particion.nextToken());
+                    } else if (i == 3) {
+                        actual.setApellidoMaterno(particion.nextToken());
+                    } else if (i == 4) {
+                        actual.setEdad(Integer.parseInt(particion.nextToken()));
+                    } else if (i == 5) {
+                        actual.setMail(particion.nextToken());
+                    } else if (i == 6){
+                        actual.setNumeroCelular(particion.nextToken());
+                    } else if (i == 7) {
+                        actual.setDireccion(particion.nextToken());
+                    } else if(i == 8){
+                        actual.setNickname(particion.nextToken());
+                    } else if (i == 9) {
+                        actual.setPassword(particion.nextToken());
+                    }
+                }
+                losAdmins.add(actual);
+                lineaLeida = bufferEntrada.readLine();
+            }
+            bufferEntrada.close();
+        } catch (IOException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static void llenarArraylistEmpleados(ArrayList<Empleado> losEmpleados){
+        try{
+            File archivoClientes = new File("RegistroEmpleados.txt");
+            FileReader lector = new FileReader(archivoClientes);
+            BufferedReader bufferEntrada = new BufferedReader(lector);
+            String lineaLeida = bufferEntrada.readLine();
+            while(lineaLeida != null){
+                Empleado actual = new Empleado();
+                StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
+                int datos = particion.countTokens();
+                for(int i = 0; i <= datos; i++){
+                    if(i == 0){
+                        actual.setNombre(particion.nextToken());
+                    } else if (i == 1) {
+                        actual.setApellidoPaterno(particion.nextToken());
+                    } else if (i == 2){
+                        actual.setApellidoMaterno(particion.nextToken());
+                    } else if (i == 3) {
+                        actual.setFechaDeNacimiento(particion.nextToken());
+                    } else if (i == 4) {
+                        actual.setMail(particion.nextToken());
+                    } else if (i == 5) {
+                        actual.setNumeroCelular(particion.nextToken());
+                    } else if (i == 6){
+                        actual.setDireccion(particion.nextToken());
+                    }
+                }
+                losEmpleados.add(actual);
+                lineaLeida = bufferEntrada.readLine();
+            }
+            bufferEntrada.close();
         } catch (IOException e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -103,7 +182,7 @@ public class LectorDeArchivos {
         System.out.println("----------------------Precios Baño----------------------------");
         System.out.println("|Tamaño|Precio Base|Sin pelo|Pelo corto|Pelo medio|Pelo largo|");
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\PrecioBaniosPerro.txt");
+            File archivoClientes = new File("PrecioBaniosPerro.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -116,6 +195,7 @@ public class LectorDeArchivos {
                 System.out.println();
                 lineaLeida = bufferEntrada.readLine();
             }
+            bufferEntrada.close();
         }catch (IOException e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -123,7 +203,7 @@ public class LectorDeArchivos {
 
     public static void cargarMascotasParaCliente(ArrayList<Cliente> clientes) {
         try {
-            File archivoMascotas = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\RegistroMascotas.txt");
+            File archivoMascotas = new File("RegistroMascotas.txt");
             FileReader lectorMascotas = new FileReader(archivoMascotas);
             BufferedReader bufferEntradaMascotas = new BufferedReader(lectorMascotas);
             String lineaMascota = bufferEntradaMascotas.readLine();

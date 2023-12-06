@@ -1,5 +1,3 @@
-import jdk.jshell.execution.Util;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,6 +37,7 @@ public class Utilidades {
         int edad = 0;
         //Este proceso consta de 3 filtros para realizar el registro de un nuevo administrados o usuario.
         while(!passwordsIguales || !datosCorrectos || coincidenciaNickPass){
+            limpPantalla();
             System.out.println("Ingresa tu nombre: ");
             nombre = scanner.nextLine();
             System.out.println("Ingresa tu apellido paterno: ");
@@ -71,6 +70,7 @@ public class Utilidades {
                     System.out.println("El nickname y la contraseña ya existen en el sistema. Por favor, elige otros.");
                 } else {
                     coincidenciaNickPass = false;
+                    limpPantalla();
                     Utilidades.impresionDeDatosMenu(nombre, apellidoPaterno, apellidoMaterno, edad, correo, numeroCelular, direccion, nickname, password2);
                     System.out.println("¿Los datos ingresados son correctos?");
                     System.out.println("Si - No");
@@ -114,14 +114,16 @@ public class Utilidades {
     /**
      * Este método imprime el menu para ingresar al sistema con un nickname y una contraseña registrados.
      */
-    public static void menuIngresar(){
+    public static void menuIngresar(ArrayList<Empleado> losEmpleados){
         String nickname;
         String password;
         boolean ingresoValido = false;
         boolean datosCorrectosCliente = false;
         boolean datosCorrectosAdministrador = false;
         LectorDeArchivos.llenarArraylistClientes(clientes);
+        LectorDeArchivos.llenarArraylistAdministradores(administradores);
         while(!ingresoValido){
+            limpPantalla();
             System.out.println("----INGRESAR----");
             System.out.println("Ingresar como:");
             System.out.println("- Cliente");
@@ -130,6 +132,7 @@ public class Utilidades {
             if(opcionMenuIngresar.equalsIgnoreCase("Cliente")){
                 ingresoValido = true;
                 while(!datosCorrectosCliente){
+                    limpPantalla();
                     System.out.println("----CLIENTE----");
                     System.out.println("Ingresa tu nickname:");
                     nickname = scanner.nextLine();
@@ -152,6 +155,7 @@ public class Utilidades {
             } else if (opcionMenuIngresar.equalsIgnoreCase("Administrador")) {
                 ingresoValido = true;
                 while (!datosCorrectosAdministrador) {
+                    limpPantalla();
                     System.out.println("----ADMINISTRADOR----");
                     System.out.println("Ingresa tu nickname: ");
                     nickname = scanner.nextLine();
@@ -161,6 +165,12 @@ public class Utilidades {
                     if (encontrado) {
                         datosCorrectosAdministrador = true;
                         System.out.println("Bienvenido " + nickname);
+                        for (Administrador actual : administradores) {
+                            if(actual.getNickname().equals(nickname) && actual.getPassword().equals(password)){
+                                menuAdministrador(actual, losEmpleados);
+                            }
+                        }
+                        administradores.removeAll(administradores);
                     } else {
                         System.out.println("Nickname y/o contraseña no encontrados.");
                     }
@@ -174,6 +184,7 @@ public class Utilidades {
     public static void menuCliente(Cliente cliente){
         int opcionCliente;
         do{
+            limpPantalla();
             System.out.println("----CLIENTE----");
             System.out.println("1. Registrar una mascota");
             System.out.println("2. Reservar un servicio especial o combo para mascota");
@@ -216,5 +227,40 @@ public class Utilidades {
         System.out.println("Dirección: " + direccion);
         System.out.println("Nickname: " + nickname);
         System.out.println("Contraseña: " + password);
+    }
+
+    public static void limpPantalla(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    public static void menuAdministrador(Administrador elAdmin,ArrayList<Empleado> losEmpleados){
+        int opcionAdmin;
+        do{
+            limpPantalla();
+            System.out.println("----ADMINISTRADOR----");
+            System.out.println("1. Registrar un empleado");
+            System.out.println("2. Asignar un servicio a un empleado");
+            System.out.println("3. Cobrar una orden de servicios");
+            System.out.println("4. Salir de la sesión");
+            opcionAdmin = scanner.nextInt();
+            scanner.nextLine();
+            switch(opcionAdmin){
+                case 1:
+                    elAdmin.registrarEmpleado(losEmpleados);
+                    break;
+                case 2:
+                    //Debe mandar a un metodo que asigna un servicio a un empleado
+                    break;
+                case 3:
+                    //Debe mandar a un metodo que cobra una orden de servicios
+                    break;
+                case 4:
+                    System.out.println("Cerrando sesión...");
+                    break;
+                default:
+                    System.out.println("Opción no válida, intenta de nuevo.");
+            }
+        }while(opcionAdmin!=4);
     }
 }

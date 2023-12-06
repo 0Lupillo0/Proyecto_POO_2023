@@ -20,6 +20,7 @@ public class Cliente extends Usuario{
     public void registrarUnaMascota(){
         boolean mascotaValida = false;
         while(!mascotaValida){
+            Utilidades.limpPantalla();
             System.out.println("----REGISTRAR MASCOTA----");
             System.out.println("Ingrese que desea registrar:");
             System.out.println("Perro - Gato");

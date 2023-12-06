@@ -1,0 +1,3 @@
+Juan:Fula:Nito:14/04/2003:correo@correo.com:123564785:Carretera a su casa
+jose:Fula:Nito:14/02/2000:cidfsdfsdf:124535:fbdfgdf
+Manolo:Man:Olito:21/11/1995:correo@correo.com:56111222333:Su casa jaja saludos
