@@ -20,7 +20,6 @@ public class Cliente extends Usuario{
     public void registrarUnaMascota(){
         boolean mascotaValida = false;
         while(!mascotaValida){
-            Utilidades.limpPantalla();
             System.out.println("----REGISTRAR MASCOTA----");
             System.out.println("Ingrese que desea registrar:");
             System.out.println("Perro - Gato");
@@ -128,7 +127,15 @@ public class Cliente extends Usuario{
     }
 
     public void verPreciosDeServicios(){
+        System.out.println("PRECIOS PERRO:");
         LectorDeArchivos.leerPreciosBanioPerro();
+        LectorDeArchivos.leerPreciosPeloPerro();
+        LectorDeArchivos.leerPreciosUniasPerro();
+        LectorDeArchivos.leerPreciosDentalPerro();
+        System.out.println("PRECIOS GATO:");
+        LectorDeArchivos.leerPreciosBaniosGato();
+        LectorDeArchivos.leerPrecioUniasGato();
+        LectorDeArchivos.leerPrecioDentalGato();
     }
 
     public float getCuenta() {
