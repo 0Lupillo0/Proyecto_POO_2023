@@ -1,3 +1,4 @@
+import java.io.*;
 public class Servicio {
     private String tipoDeServicio;
 
@@ -12,5 +13,9 @@ public class Servicio {
     }
 
     //Busca el servicio dentro del archivo de servicios
+    //public Servicio buscarServicio(){
+        //agregar un lector de archivos y obtener el servicio
+
+    //}
 
 }
