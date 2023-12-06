@@ -1,0 +1,5 @@
+Miniatura:25.0
+Pequeño:25.0
+Mediano:40.0
+Grande:40.0
+Gigante:55.0
