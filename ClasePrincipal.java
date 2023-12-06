@@ -10,19 +10,22 @@ public class ClasePrincipal {
         ArrayList<Empleado> empleados = new ArrayList<>(); //Para que todos los administradores accedan a los empleados atravez de una arraylist
         LectorDeArchivos.llenarArraylistEmpleados(empleados);
         do{
-            Utilidades.limpPantalla();
             opcionSwitch1 = Utilidades.menuPrincipal();
             switch(opcionSwitch1){
                 case 1:
                     Utilidades.menuNuevoRegistro(); //Se despliega el menu de interacción para realizar un nuevo registro.
+                    Utilidades.limpPantalla();
                     break;
                 case 2:
                     Utilidades.menuIngresar(empleados); //Se despliega el menu de interacción para ingresar al sistema con un registro ya existente.
+                    Utilidades.limpPantalla();
                     break;
                 case 3:
+                    Utilidades.limpPantalla();
                     System.out.println("Cerrando sistema..."); //Se imprime este mensaje indicando que se terminara la ejecución del programa.
                     break;
                 default:
+                    Utilidades.limpPantalla();
                     System.out.println("Opción no válida. Intente de nuevo"); //Mensaje indicando que la opción ingresada no es válida.
                 }
         }while(opcionSwitch1 != 3);

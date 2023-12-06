@@ -30,9 +30,10 @@ public class Administrador extends Usuario{
         Empleado nuevoEmpleado = new Empleado(nombre, apellidoPaterno, apellidoMaterno, correo, numero, direcion, fechaDeNacimiento);
         EscritorDeArchivos.escribirEmpleado(nuevoEmpleado);
         losEmpleados.add(nuevoEmpleado);
+        Utilidades.limpPantalla();
         System.out.println("Se ha registrado un empleado");
         try{
-            Thread.sleep(500);
+            Thread.sleep(5000);
         }catch(InterruptedException e){
             System.out.println(e);
         }
