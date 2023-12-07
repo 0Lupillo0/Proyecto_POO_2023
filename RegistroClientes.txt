@@ -4,3 +4,4 @@ cliente:Jhonatan:Amaya:Esquivel:20:correo@correo.com:111222333444:Mi direccion:J
 cliente:luis:Perez:Perez:24:correo@correo.com:56319126331:direccion direccion :Luis123:contrase�a2
 cliente:Juantio:Juan:Ito:99:correo@correo.com:51511626:direccion:JuanIto55:juanPro123
 cliente:Jose:Bb:Mm:39:pppp:9292983838:por alla:lupillo:1234
+cliente:jose:ba�os:maonjaraz:20:correo@23:77366463272:mic asa:lupillo:123

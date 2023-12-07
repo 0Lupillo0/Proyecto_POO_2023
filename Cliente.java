@@ -88,10 +88,12 @@ public class Cliente extends Usuario{
                    System.out.println("Edad: " + perroActual.getEdad() + " años.");
                    System.out.println("Tipo de pelo: " + perroActual.getTipoDePelo());
                    System.out.println("Altura: " + perroActual.getAltura());
+                   System.out.println("Tipo de mascota: Perro");
                } else if (actual instanceof Gato) {
                    System.out.println("Nombre: " + actual.getNombre());
                    System.out.println("Edad: " + actual.getEdad());
                    System.out.println("Tipo de pelo: " + actual.getTipoDePelo());
+                   System.out.println("Tipo de mascota: Gato");
                }
                indice++;
            }
@@ -114,14 +116,20 @@ public class Cliente extends Usuario{
                    LectorDeArchivos.leerPreciosDentalPerro();
                    LectorDeArchivos.leerPreciosUniasPerro();
                    LectorDeArchivos.leerPreciosPeloPerro();
-                   if(perro.getAltura().equalsIgnoreCase("Miniatura")){
+                   //Lee el servicio elegido por el cliente
+                   System.out.println("Ingrese el tipo de servicio que requiere");
+                   String tipoDeServicio = scanner.nextLine();
+                   String tamaño = perro.getAltura();
+                   LectorDePreciosUnitarios.leerPrecio(tamaño);
 
-                   }
                } else if (eleccion instanceof Gato) {
                    System.out.println("Nombre: " + eleccion.getNombre());
                    System.out.println("Edad: " + eleccion.getEdad());
                    System.out.println("Tipo de pelo: " + eleccion.getTipoDePelo());
                    System.out.println("Lista de precios para gato");
+                   LectorDeArchivos.leerPreciosBaniosGato();
+                   LectorDeArchivos.leerPrecioUniasGato();
+                   LectorDeArchivos.leerPrecioDentalGato();
                }
            }
 
