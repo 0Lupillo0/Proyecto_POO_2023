@@ -404,9 +404,10 @@ public class LectorDeArchivos {
     public static float buscarPrecio(Mascota laMascota, String tipoDeServicio) {
         float precioTotal = 0;
         try {
-            if (tipoDeServicio.equalsIgnoreCase("Banio")) {
+            if (tipoDeServicio.equalsIgnoreCase("banio")) {
                 if (laMascota instanceof Perro) {
                     // Leer archivos para baño de perros
+                    String tipoDePelo = laMascota.getTipoDePelo();
                     String tamanio = ((Perro) laMascota).getAltura();// Linea de casteo que retorna el tamaño del perro
                     File archivoClientes = new File("PrecioBaniosPerro.txt");
                     FileReader lector = new FileReader(archivoClientes);
@@ -416,15 +417,40 @@ public class LectorDeArchivos {
                       StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
                       String tam = particion.nextToken();
                       if(tamanio.equalsIgnoreCase(tam)){
-                        precioTotal += Float.parseFloat(particion.nextToken());
-                        bufferEntrada.close();
-                        return precioTotal;
+                        int datos = particion.countTokens();
+                        for (int i = 0; i <= datos; i++) {
+                            if (i == 0) {
+                                precioTotal += Float.parseFloat(particion.nextToken());
+                            }else if(i == 1){
+                                float precio = Float.parseFloat(particion.nextToken());
+                                if(tipoDePelo.equalsIgnoreCase("sin pelo")){
+                                    precioTotal += precio;
+                                }
+                            }else if(i == 2){
+                                float precio = Float.parseFloat(particion.nextToken());
+                                if(tipoDePelo.equalsIgnoreCase("pelo corto")){
+                                    precioTotal += precio;
+                                }
+                            }else if(i == 3){
+                                float precio = Float.parseFloat(particion.nextToken());
+                                if(tipoDePelo.equalsIgnoreCase("pelo medio")){
+                                    precioTotal += precio;
+                                }
+                            }else if(i == 4){
+                                float precio = Float.parseFloat(particion.nextToken());
+                                if(tipoDePelo.equalsIgnoreCase("pelo largo")){
+                                    precioTotal += precio;
+                                }
+                            }
+                        }
                       }
                       lineaLeida = bufferEntrada.readLine();
                     }
                     bufferEntrada.close();
+                    return precioTotal;
                 } else if (laMascota instanceof Gato) {
                     // Leer archivos para baño de gato
+                    String tipoDePelo = laMascota.getTipoDePelo();
                     File archivoClientes = new File("PrecioBaniosGato.txt");
                     FileReader lector = new FileReader(archivoClientes);
                     BufferedReader bufferEntrada = new BufferedReader(lector);
@@ -435,6 +461,21 @@ public class LectorDeArchivos {
                         for (int i = 0; i <= datos; i++) {
                             if (i == 0) {
                                 precioTotal += Float.parseFloat(particion.nextToken());
+                            }else if(i == 1){
+                                float precio = Float.parseFloat(particion.nextToken());
+                                if(tipoDePelo.equalsIgnoreCase("sin pelo")){
+                                    precioTotal += precio;
+                                }
+                            }else if(i == 2){
+                                float precio = Float.parseFloat(particion.nextToken());
+                                if(tipoDePelo.equalsIgnoreCase("pelo medio")){
+                                    precioTotal += precio;
+                                }
+                            }else if(i == 3){
+                                float precio = Float.parseFloat(particion.nextToken());
+                                if(tipoDePelo.equalsIgnoreCase("pelo largo")){
+                                    precioTotal += precio;
+                                }
                             }
                         }
                         lineaLeida = bufferEntrada.readLine();
@@ -442,9 +483,10 @@ public class LectorDeArchivos {
                     bufferEntrada.close();
                     return precioTotal;
                 }
-            } else if (tipoDeServicio.equalsIgnoreCase("Pelo")) {
+            } else if (tipoDeServicio.equalsIgnoreCase("pelo")) {
                 if (laMascota instanceof Perro) {
                     // Leer archivos de corte de pelo de los perros
+                    String tipoDePelo = laMascota.getTipoDePelo();
                     String tamanio = ((Perro) laMascota).getAltura();
                     File archivoClientes = new File("PrecioPeloPerro.txt");
                     FileReader lector = new FileReader(archivoClientes);
@@ -454,17 +496,39 @@ public class LectorDeArchivos {
                       StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
                       String tam = particion.nextToken();
                       if(tamanio.equalsIgnoreCase(tam)){
-                          precioTotal += Float.parseFloat(particion.nextToken());
-                          bufferEntrada.close();
-                          return precioTotal;
+                        int datos = particion.countTokens();
+                        for (int i = 0; i <= datos; i++) {
+                            if(i == 0){
+                                float precio = Float.parseFloat(particion.nextToken());
+                                if(tipoDePelo.equalsIgnoreCase("sin pelo")){
+                                    precioTotal += precio;
+                                }
+                            }else if(i == 1){
+                                float precio = Float.parseFloat(particion.nextToken());
+                                if(tipoDePelo.equalsIgnoreCase("pelo corto")){
+                                    precioTotal += precio;
+                                }
+                            }else if(i == 2){
+                                float precio = Float.parseFloat(particion.nextToken());
+                                if(tipoDePelo.equalsIgnoreCase("pelo medio")){
+                                    precioTotal += precio;
+                                }
+                            }else if(i == 3){
+                                float precio = Float.parseFloat(particion.nextToken());
+                                if(tipoDePelo.equalsIgnoreCase("pelo largo")){
+                                    precioTotal += precio;
+                                }
+                            }
+                        }
                       }
                       lineaLeida = bufferEntrada.readLine();
                     }
                     bufferEntrada.close();
+                    return precioTotal;
                 } else if (laMascota instanceof Gato) {
                     System.out.println("No se puede cortar el pelo de un gato");
                 }
-            } else if (tipoDeServicio.equalsIgnoreCase("Unias")) {
+            } else if (tipoDeServicio.equalsIgnoreCase("unias")) {
                 if (laMascota instanceof Perro) {
                     // Leer archivo de precio uñas perro
                     String tamanio = ((Perro) laMascota).getAltura();
@@ -493,7 +557,7 @@ public class LectorDeArchivos {
                     bufferEntrada.close();
                     return precioTotal;
                 }
-            } else if (tipoDeServicio.equalsIgnoreCase("Dental")) {
+            } else if (tipoDeServicio.equalsIgnoreCase("cepillado")) {
                 if (laMascota instanceof Perro) {
                     // Leer archivo para cepillar dientes de perros
                     String tamanio = ((Perro) laMascota).getAltura();

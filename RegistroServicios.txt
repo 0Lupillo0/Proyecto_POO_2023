@@ -1,4 +1,3 @@
-banio:JhonFox45:Manolo:180.0
-dental:JhonFox45:Manolo:40.0
-unias:JhonFox45:Manolo:45.0
+banio:JhonFox45:pepe:170.0
+banio:JhonFox45:Manolo:220.0
 pelo:JhonFox45:Manolo:0.0

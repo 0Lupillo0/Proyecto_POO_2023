@@ -280,7 +280,7 @@ public class Utilidades {
                     elAdmin.registrarEmpleado(losEmpleados);
                     break;
                 case 2:
-                    //Debe mandar a un metodo que asigna un servicio a un empleado
+                    elAdmin.asignarServicioAEmpleado(losEmpleados);
                     break;
                 case 3:
                     //Debe mandar a un metodo que cobra una orden de servicios

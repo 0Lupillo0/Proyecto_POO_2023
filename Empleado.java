@@ -173,13 +173,13 @@ public class Empleado extends Usuario {
         ocupado = true;
         String tipoDeServicio = servicioActual.getTipoDeServicio();
         Mascota laMascota = servicioActual.getLaMascota();
-        if(tipoDeServicio.equalsIgnoreCase("Baño")){
+        if(tipoDeServicio.equalsIgnoreCase("banio")){
             this.bañarMascota(laMascota);
-        }else if(tipoDeServicio.equalsIgnoreCase("Pelo")){
+        }else if(tipoDeServicio.equalsIgnoreCase("pelo")){
             this.cortarPeloMascota(laMascota);
-        }else if(tipoDeServicio.equalsIgnoreCase("Unias")){
+        }else if(tipoDeServicio.equalsIgnoreCase("unias")){
             this.cortarUniasMascota(laMascota);
-        }else if(tipoDeServicio.equalsIgnoreCase("Cepillar")){
+        }else if(tipoDeServicio.equalsIgnoreCase("cepillado")){
             this.cepillarDientesMascota(laMascota);
         }else{
             System.out.println("No tenemos ese tipo de servicio");

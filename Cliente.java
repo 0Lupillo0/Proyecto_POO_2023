@@ -117,12 +117,32 @@ public class Cliente extends Usuario{
                    LectorDeArchivos.leerPreciosUniasPerro();
                    LectorDeArchivos.leerPreciosPeloPerro();
                    //Lee el servicio elegido por el cliente
-                   System.out.println("Ingrese el tipo de servicio que requiere");
+                   System.out.println("Ingrese el numero que corresponda al tipo de servicio que requiere");
+                   System.out.println("1.-Baño.");
+                   System.out.println("2.-Cepillado dental.");
+                   System.out.println("3.-Corte de uñas.");
+                   System.out.println("4.-Corte de pelo.");
+                   int opcion = 0;
+                   String tipoDeServicio = new String();
+                   opcion = scanner.nextInt();
+                   scanner.nextLine();
+                   if(opcion == 1){
+                    tipoDeServicio = "banio";
+                   }else if(opcion == 2){
+                    tipoDeServicio = "cepillado";
+                   }else if(opcion == 3){
+                    tipoDeServicio = "unias";
+                   }else if(opcion ==4){
+                    tipoDeServicio = "pelo";
+                   }else{
+                    System.out.println("Opción no valida.");
+                   }
 
-                   String tipoDeServicio = scanner.nextLine();
                    float precioTotal = LectorDeArchivos.buscarPrecio(perro, tipoDeServicio);
                    Servicio elServicio = new Servicio(tipoDeServicio, perro, this, precioTotal);
                    EscritorDeArchivos.escribirServicio(elServicio);
+                   Utilidades.limpPantalla();
+                   System.out.println("Servicio registrado con exito.");
 
                } else if (eleccion instanceof Gato) {
                    Gato gato = (Gato)eleccion;
@@ -134,10 +154,29 @@ public class Cliente extends Usuario{
                    LectorDeArchivos.leerPrecioUniasGato();
                    LectorDeArchivos.leerPrecioDentalGato();
 
-                   String tipoDeServicio = scanner.nextLine();
+                   System.out.println("Ingrese el numero que corresponda al tipo de servicio que requiere");
+                   System.out.println("1.-Baño.");
+                   System.out.println("2.-Cepillado dental.");
+                   System.out.println("3.-Corte de uñas.");
+                   int opcion = 0;
+                   String tipoDeServicio = new String();
+                   opcion = scanner.nextInt();
+                   scanner.nextLine();
+                   if(opcion == 1){
+                    tipoDeServicio = "banio";
+                   }else if(opcion == 2){
+                    tipoDeServicio = "cepillado";
+                   }else if(opcion == 3){
+                    tipoDeServicio = "unias";
+                   }else{
+                    System.out.println("Opción no valida.");
+                   }
+
                    float precioTotal = LectorDeArchivos.buscarPrecio(gato, tipoDeServicio);
                    Servicio elServicio = new Servicio(tipoDeServicio, gato, this, precioTotal);
                    EscritorDeArchivos.escribirServicio(elServicio);
+                   Utilidades.limpPantalla();
+                   System.out.println("Servicio registrado con exito.");
                    
                }
            }
