@@ -377,28 +377,134 @@ public class LectorDeArchivos {
         }
     }
 
-    public static void leerPrecioUnitarioBanioPerro(String tamanioBuscado){
-        try{
-            File archivoClientes = new File("PrecioBaniosPerro.txt");
-            FileReader lector = new FileReader(archivoClientes);
-            BufferedReader bufferEntrada = new BufferedReader(lector);
-            String lineaLeida = bufferEntrada.readLine();
-            String[] precios = new String[10];
-            while(lineaLeida != null){
-                StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
-                int datos = particion.countTokens();
-                for(int i = 0; i < datos; i++){
-                    precios[i] = particion.nextToken();
-                    if(precios[0].equalsIgnoreCase(tamanioBuscado)){
-                        System.out.pritnln(precios[i+1]);
+    public static float buscarPrecio(Mascota laMascota, String tipoDeServicio) {
+        float precioTotal = 0;
+        try {
+            if (tipoDeServicio.equalsIgnoreCase("Baño")) {
+                if (laMascota instanceof Perro) {
+                    // Leer archivos para baño de perros
+                    String tamanio = ((Perro) laMascota).getAltura();// Linea de casteo que retorna el tamaño del perro
+                    File archivoClientes = new File("PrecioBaniosPerro.txt");
+                    FileReader lector = new FileReader(archivoClientes);
+                    BufferedReader bufferEntrada = new BufferedReader(lector);
+                    String lineaLeida = bufferEntrada.readLine();
+                    while(lineaLeida != null){
+                      StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
+                      String tam = particion.nextToken();
+                      if(tamanio.equalsIgnoreCase(tam)){
+                        precioTotal += Float.parseFloat(particion.nextToken());
+                        bufferEntrada.close();
+                        return precioTotal;
+                      }
+                      lineaLeida = bufferEntrada.readLine();
                     }
+                    bufferEntrada.close();
+                } else if (laMascota instanceof Gato) {
+                    // Leer archivos para baño de gato
+                    File archivoClientes = new File("PrecioBaniosGato.txt");
+                    FileReader lector = new FileReader(archivoClientes);
+                    BufferedReader bufferEntrada = new BufferedReader(lector);
+                    String lineaLeida = bufferEntrada.readLine();
+                    while (lineaLeida != null) {
+                        StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
+                        int datos = particion.countTokens();
+                        for (int i = 0; i <= datos; i++) {
+                            if (i == 0) {
+                                precioTotal += Float.parseFloat(particion.nextToken());
+                            }
+                        }
+                        lineaLeida = bufferEntrada.readLine();
+                    }
+                    bufferEntrada.close();
+                    return precioTotal;
                 }
-                System.out.println();
-                lineaLeida = bufferEntrada.readLine();
+            } else if (tipoDeServicio.equalsIgnoreCase("Pelo")) {
+                if (laMascota instanceof Perro) {
+                    // Leer archivos de corte de pelo de los perros
+                    String tamanio = ((Perro) laMascota).getAltura();
+                    File archivoClientes = new File("PrecioPeloPerro.txt");
+                    FileReader lector = new FileReader(archivoClientes);
+                    BufferedReader bufferEntrada = new BufferedReader(lector);
+                    String lineaLeida = bufferEntrada.readLine();
+                    while(lineaLeida != null){
+                      StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
+                      String tam = particion.nextToken();
+                      if(tamanio.equalsIgnoreCase(tam)){
+                          precioTotal += Float.parseFloat(particion.nextToken());
+                          bufferEntrada.close();
+                          return precioTotal;
+                      }
+                      lineaLeida = bufferEntrada.readLine();
+                    }
+                    bufferEntrada.close();
+                } else if (laMascota instanceof Gato) {
+                    System.out.println("No se puede cortar el pelo de un gato");
+                }
+            } else if (tipoDeServicio.equalsIgnoreCase("Unias")) {
+                if (laMascota instanceof Perro) {
+                    // Leer archivo de precio uñas perro
+                    String tamanio = ((Perro) laMascota).getAltura();
+                    File archivoClientes = new File("PrecioUniaPerro.txt");
+                    FileReader lector = new FileReader(archivoClientes);
+                    BufferedReader bufferEntrada = new BufferedReader(lector);
+                    String lineaLeida = bufferEntrada.readLine();
+                    while(lineaLeida != null){
+                      StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
+                      String tam = particion.nextToken();
+                      if(tamanio.equalsIgnoreCase(tam)){
+                          precioTotal += Float.parseFloat(particion.nextToken());
+                          bufferEntrada.close();
+                          return precioTotal;
+                      }
+                      lineaLeida = bufferEntrada.readLine();
+                    }
+                    bufferEntrada.close();
+                } else if (laMascota instanceof Gato) {
+                    // Leer archivo de precio uñas gato
+                    File archivoClientes = new File("PrecioUniasGato.txt");
+                    FileReader lector = new FileReader(archivoClientes);
+                    BufferedReader bufferEntrada = new BufferedReader(lector);
+                    String lineaLeida = bufferEntrada.readLine();
+                    precioTotal += Float.parseFloat(lineaLeida);
+                    bufferEntrada.close();
+                    return precioTotal;
+                }
+            } else if (tipoDeServicio.equalsIgnoreCase("Cepillar")) {
+                if (laMascota instanceof Perro) {
+                    // Leer archivo para cepillar dientes de perros
+                    String tamanio = ((Perro) laMascota).getAltura();
+                    File archivoClientes = new File("PrecioDentalGato.txt");
+                    FileReader lector = new FileReader(archivoClientes);
+                    BufferedReader bufferEntrada = new BufferedReader(lector);
+                    String lineaLeida = bufferEntrada.readLine();
+                    while(lineaLeida != null){
+                      StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
+                      String tam = particion.nextToken();
+                      if(tamanio.equalsIgnoreCase(tam)){
+                          precioTotal += Float.parseFloat(particion.nextToken());
+                          bufferEntrada.close();
+                          return precioTotal;
+                      }
+                      lineaLeida = bufferEntrada.readLine();
+                    }
+                    bufferEntrada.close();
+                } else if (laMascota instanceof Gato) {
+                    // Leer archivos para cepillar dientes de gato
+                    File archivoClientes = new File("PrecioDentalGato.txt");
+                    FileReader lector = new FileReader(archivoClientes);
+                    BufferedReader bufferEntrada = new BufferedReader(lector);
+                    String lineaLeida = bufferEntrada.readLine();
+                    precioTotal += Float.parseFloat(lineaLeida);
+                    bufferEntrada.close();
+                    return precioTotal;
+                }
+            } else {
+                System.out.println("Error inesperado.");
             }
-            bufferEntrada.close();
-        }catch(IOException e){
-            System.out.println("Error: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error" + e.toString());
         }
+        return precioTotal; // Puede que necesites agregar un valor de retorno apropiado en caso de que no entre en ningún caso.
     }
+    
 }
