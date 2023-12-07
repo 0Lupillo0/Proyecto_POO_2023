@@ -186,4 +186,17 @@ public class Empleado extends Usuario {
         }
         ocupado = false;
     }
+    /**
+     * Imprime en pantalla la informacion del empleado.
+     */
+    public void impInfo(){
+        System.out.println("-----DATOS DEL EMPLEADO-----");
+        System.out.println("Nombre:"+getNombre());
+        System.out.println("Apellido paterno:"+getApellidoPaterno());
+        System.out.println("Apellido materno:"+getApellidoMaterno());
+        System.out.println("Fecha de nacimiento:"+fechaDeNacimiento);
+        System.out.println("Correo electronico:"+getMail());
+        System.out.println("Numero celular:"+getNumeroCelular());
+        System.out.println("Dirección:"+getDireccion());
+    }
 }

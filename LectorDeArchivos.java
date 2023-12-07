@@ -592,6 +592,10 @@ public class LectorDeArchivos {
         } catch (IOException e) {
             System.out.println("Error" + e.toString());
         }
-        return precioTotal; // Puede que necesites agregar un valor de retorno apropiado en caso de que no entre en ningún caso.
+        return precioTotal;
+    }
+
+    public static void llenarArraylistServicios(ArrayList<Servicio> losServicios){
+        //Ahorita lo llenamos
     }
 }

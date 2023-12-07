@@ -40,6 +40,63 @@ public class Administrador extends Usuario{
     }
 
     public void asignarServicioAEmpleado(ArrayList<Empleado> losEmpleados){
-        
+        int contador = 0;
+        int indice,indiceEmpleado;
+        System.out.println("----- ASIGNACION DE SERVICIOS -----");
+        ArrayList<Servicio> losServicios = new ArrayList<>();
+        LectorDeArchivos.llenarArraylistServicios(losServicios);
+        //Bloque de prueba
+        Cliente c = new Cliente("Manolo", "Mano", "Lito", 25, "correo@correo.com", "265656595", "carretera bla bla", "Manolo5", "jajaxd");
+        Mascota gato = new Gato("Manolito", 5, "Pelo corto");
+        //Mascota perro = new Perro("Manolito", 5, "Pelo Corto", "Mediana");
+        Servicio sa = new Servicio("Banio", gato, c, 55.58f);
+        losServicios.add(sa);
+        //Bloque de prueba
+        if(losServicios.isEmpty()){
+            Utilidades.limpPantalla();
+            System.out.println("No hay servicios pendientes");
+            try{
+            Thread.sleep(5000);
+            return;
+            }catch(InterruptedException e){
+                System.out.println(e);
+            }
+        }
+        for(Servicio s : losServicios){
+            System.out.println("-----SERVICIO "+contador+" -----");
+            String nombreCliente = s.getElCliente().getNombre();
+            String nombreMascota = s.getLaMascota().getNombre();
+            System.out.println("Nombre del cliente:"+nombreCliente);
+            System.out.println("Nombre de la mascota:"+nombreMascota);
+            contador++;
+        }
+        System.out.println("Ingrese el indice el servicio que quiere asignar:");
+        indice = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("INFORMACION DEL SERVICIO SELECCIONADO:");
+        Servicio servicioBuscado = losServicios.get(indice);
+        servicioBuscado.impInfoDelServicio();
+        System.out.println("LISTA DE EMPLEADOS DESOCUPADOS:");
+        contador = 0;
+        for(Empleado e : losEmpleados){
+            System.out.println("-----EMPLEADO "+ contador+" -----");
+            if(e.getOcupado()){
+                System.out.println("Esta ocupado");
+                contador++;
+                continue;
+            }
+            e.impInfo();
+            contador++;
+        }
+        System.out.println("Ingrese el indice del empleado que realizara el servicio:");
+        indiceEmpleado = scanner.nextInt();
+        scanner.nextLine();
+        Empleado buscado = losEmpleados.get(indiceEmpleado);
+        buscado.setServicioActual(servicioBuscado);
+        buscado.realizarServicio();
+        Utilidades.limpPantalla();
+        System.out.println("Todos los servicios estan listos");
+        System.out.println("Nombre del cliente:"+servicioBuscado.getElCliente().getNombre());
+        System.out.println("Nombre de la mascota:"+servicioBuscado.getLaMascota().getNombre());
     }
 }
