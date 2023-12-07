@@ -120,7 +120,7 @@ public class Cliente extends Usuario{
                    System.out.println("Ingrese el tipo de servicio que requiere");
                    String tipoDeServicio = scanner.nextLine();
                    String tamaño = perro.getAltura();
-                   LectorDePreciosUnitarios.leerPrecio(tamaño);
+                   LectorDeArchivos.leerPrecioUnitarioBanioPerro(tamaño);
 
                } else if (eleccion instanceof Gato) {
                    System.out.println("Nombre: " + eleccion.getNombre());

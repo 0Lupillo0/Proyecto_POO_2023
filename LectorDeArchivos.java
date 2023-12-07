@@ -377,27 +377,29 @@ public class LectorDeArchivos {
         }
     }
 
-    public static void leerPrecio(String tamanioBuscado){
-        try (BufferedReader br = new BufferedReader(new FileReader("PrecioBaniosPerro.txt"))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                // Dividir la línea en partes usando el delimitador ":"
-                String[] partes = linea.split(":");
-                
-                // Verificar si el tamaño coincide con el buscado
-                if (partes.length > 0 && partes[0].equals(tamanioBuscado)) {
-                    // Obtener el número correspondiente
-                    if (partes.length > 1) {
-                        double numero = Double.parseDouble(partes[1]);
-                        System.out.println("Precio base para " + tamanioBuscado + ": " + numero);
-                    } else {
-                        System.out.println("No se encontró un precio para " + tamanioBuscado);
+    public static void leerPrecioUnitarioBanioPerro(String tamanioBuscado){
+        try{
+            File archivoClientes = new File("PrecioBaniosPerro.txt");
+            FileReader lector = new FileReader(archivoClientes);
+            BufferedReader bufferEntrada = new BufferedReader(lector);
+            String lineaLeida = bufferEntrada.readLine();
+            String[] precios = new String[10];
+            while(lineaLeida != null){
+                StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
+                int datos = particion.countTokens();
+                for(int i = 0; i < datos; i++){
+                    precios[i] = particion.nextToken();
+
+                    if(precios[0].equalsIgnoreCase(tamanioBuscado)){
+                        System.out.pritnln(precios[i+1]);
                     }
-                    break; // Puedes salir del bucle si solo estás buscando uno
                 }
+                System.out.println();
+                lineaLeida = bufferEntrada.readLine();
             }
-        } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
+            bufferEntrada.close();
+        }catch(IOException e){
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }
