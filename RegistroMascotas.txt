@@ -5,3 +5,5 @@ samuelo23:gato:Messi:6:Pelo largo
 samuelo23:perro:Milaneso:1:Pelo corto:Mediano
 lupillo:perro:pepe:20:sin pelo:mediano
 lupillo:gato:pepe:23:pelo largo
+JhonFox45:perro:Manolo:5:Sin pelo:Mediano
+JhonFox45:gato:pepe:2:Pelo medio

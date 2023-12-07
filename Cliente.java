@@ -118,11 +118,14 @@ public class Cliente extends Usuario{
                    LectorDeArchivos.leerPreciosPeloPerro();
                    //Lee el servicio elegido por el cliente
                    System.out.println("Ingrese el tipo de servicio que requiere");
+
                    String tipoDeServicio = scanner.nextLine();
-                   String tamaño = perro.getAltura();
-                   LectorDeArchivos.leerPrecioUnitarioBanioPerro(tamaño);
+                   float precioTotal = LectorDeArchivos.buscarPrecio(perro, tipoDeServicio);
+                   Servicio elServicio = new Servicio(tipoDeServicio, perro, this, precioTotal);
+                   EscritorDeArchivos.escribirServicio(elServicio);
 
                } else if (eleccion instanceof Gato) {
+                   Gato gato = (Gato)eleccion;
                    System.out.println("Nombre: " + eleccion.getNombre());
                    System.out.println("Edad: " + eleccion.getEdad());
                    System.out.println("Tipo de pelo: " + eleccion.getTipoDePelo());
@@ -130,6 +133,12 @@ public class Cliente extends Usuario{
                    LectorDeArchivos.leerPreciosBaniosGato();
                    LectorDeArchivos.leerPrecioUniasGato();
                    LectorDeArchivos.leerPrecioDentalGato();
+
+                   String tipoDeServicio = scanner.nextLine();
+                   float precioTotal = LectorDeArchivos.buscarPrecio(gato, tipoDeServicio);
+                   Servicio elServicio = new Servicio(tipoDeServicio, gato, this, precioTotal);
+                   EscritorDeArchivos.escribirServicio(elServicio);
+                   
                }
            }
 

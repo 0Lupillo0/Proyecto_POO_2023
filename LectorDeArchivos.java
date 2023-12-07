@@ -377,10 +377,34 @@ public class LectorDeArchivos {
         }
     }
 
+    public static void leerPrecio(String tamanioBuscado){
+        try (BufferedReader br = new BufferedReader(new FileReader("PrecioBaniosPerro.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                // Dividir la línea en partes usando el delimitador ":"
+                String[] partes = linea.split(":");
+                
+                // Verificar si el tamaño coincide con el buscado
+                if (partes.length > 0 && partes[0].equals(tamanioBuscado)) {
+                    // Obtener el número correspondiente
+                    if (partes.length > 1) {
+                        double numero = Double.parseDouble(partes[1]);
+                        System.out.println("Precio base para " + tamanioBuscado + ": " + numero);
+                    } else {
+                        System.out.println("No se encontró un precio para " + tamanioBuscado);
+                    }
+                    break; // Puedes salir del bucle si solo estás buscando uno
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static float buscarPrecio(Mascota laMascota, String tipoDeServicio) {
         float precioTotal = 0;
         try {
-            if (tipoDeServicio.equalsIgnoreCase("Baño")) {
+            if (tipoDeServicio.equalsIgnoreCase("Banio")) {
                 if (laMascota instanceof Perro) {
                     // Leer archivos para baño de perros
                     String tamanio = ((Perro) laMascota).getAltura();// Linea de casteo que retorna el tamaño del perro
@@ -461,7 +485,7 @@ public class LectorDeArchivos {
                     bufferEntrada.close();
                 } else if (laMascota instanceof Gato) {
                     // Leer archivo de precio uñas gato
-                    File archivoClientes = new File("PrecioUniasGato.txt");
+                    File archivoClientes = new File("PrecioUniaGato.txt");
                     FileReader lector = new FileReader(archivoClientes);
                     BufferedReader bufferEntrada = new BufferedReader(lector);
                     String lineaLeida = bufferEntrada.readLine();
@@ -469,11 +493,11 @@ public class LectorDeArchivos {
                     bufferEntrada.close();
                     return precioTotal;
                 }
-            } else if (tipoDeServicio.equalsIgnoreCase("Cepillar")) {
+            } else if (tipoDeServicio.equalsIgnoreCase("Dental")) {
                 if (laMascota instanceof Perro) {
                     // Leer archivo para cepillar dientes de perros
                     String tamanio = ((Perro) laMascota).getAltura();
-                    File archivoClientes = new File("PrecioDentalGato.txt");
+                    File archivoClientes = new File("PrecioDentalPerro.txt");
                     FileReader lector = new FileReader(archivoClientes);
                     BufferedReader bufferEntrada = new BufferedReader(lector);
                     String lineaLeida = bufferEntrada.readLine();
@@ -506,5 +530,4 @@ public class LectorDeArchivos {
         }
         return precioTotal; // Puede que necesites agregar un valor de retorno apropiado en caso de que no entre en ningún caso.
     }
-    
 }

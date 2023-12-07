@@ -179,7 +179,7 @@ public class Empleado extends Usuario {
             this.cortarPeloMascota(laMascota);
         }else if(tipoDeServicio.equalsIgnoreCase("Unias")){
             this.cortarUniasMascota(laMascota);
-        }else if(tipoDeServicio.equalsIgnoreCase("cepillar")){
+        }else if(tipoDeServicio.equalsIgnoreCase("Cepillar")){
             this.cepillarDientesMascota(laMascota);
         }else{
             System.out.println("No tenemos ese tipo de servicio");
