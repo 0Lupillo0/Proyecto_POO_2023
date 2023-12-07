@@ -1,44 +1,77 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-public class Administrador extends Usuario{
+/**
+ * Clase que representa a un administrador en el sistema.
+ * Extiende la clase abstracta Usuario.
+ */
+public class Administrador extends Usuario {
+    // Objeto Scanner para la entrada del usuario
     Scanner scanner = new Scanner(System.in);
-    public Administrador(String nombre, String apellidoPaterno, String apellidoMaterno, int edad, String mail, String numeroCelular, String direccion, String nickname, String password){
+    /**
+     * Constructor que inicializa un objeto Administrador con información básica.
+     *
+     * @param nombre          Nombre del administrador.
+     * @param apellidoPaterno Apellido paterno del administrador.
+     * @param apellidoMaterno Apellido materno del administrador.
+     * @param edad            Edad del administrador.
+     * @param mail            Correo electrónico del administrador.
+     * @param numeroCelular   Número de celular del administrador.
+     * @param direccion       Dirección del administrador.
+     * @param nickname        Nombre de usuario (nickname) del administrador.
+     * @param password        Contraseña del administrador.
+     */
+    public Administrador(String nombre, String apellidoPaterno, String apellidoMaterno, int edad, String mail, String numeroCelular, String direccion, String nickname, String password) {
         super(nombre, apellidoPaterno, apellidoMaterno, edad, mail, numeroCelular, direccion, nickname, password);
     }
-
-    public Administrador(){
+    /**
+     * Constructor por defecto que llama al constructor de la clase base (Usuario).
+     */
+    public Administrador() {
         super();
     }
-
-    public void registrarEmpleado(ArrayList<Empleado> losEmpleados){
+   /**
+ * Registra un nuevo empleado solicitando información al usuario, crea un objeto Empleado,
+ * lo agrega a una lista y escribe sus datos en un archivo.
+ *
+ * @param losEmpleados Lista de empleados donde se agregará el nuevo empleado.
+ */
+public void registrarEmpleado(ArrayList<Empleado> losEmpleados) {
+        // Limpia la pantalla para una presentación más clara
         Utilidades.limpPantalla();
         System.out.println("----REGISTRAR EMPLEADO----");
-        System.out.println("Ingresa el nombre del empleado:");
+    
+        // Solicita información al usuario para crear un nuevo empleado
         String nombre = scanner.nextLine();
-        System.out.println("Ingresa el apellido paterno del empleado:");
         String apellidoPaterno = scanner.nextLine();
-        System.out.println("Ingresa el apellido materno del empleado:");
         String apellidoMaterno = scanner.nextLine();
-        System.out.println("Ingresa la fecha de nacimiento del empleado (Use el siguiente formato dd/mm/aaaa):");
         String fechaDeNacimiento = scanner.nextLine();
-        System.out.println("Ingresa el correo electrónico del empleado:");
         String correo = scanner.nextLine();
-        System.out.println("Ingresa el número celular del empleado:");
         String numero = scanner.nextLine();
-        System.out.println("Ingresa la dirección del empleado:");
-        String direcion = scanner.nextLine();
-        Empleado nuevoEmpleado = new Empleado(nombre, apellidoPaterno, apellidoMaterno, correo, numero, direcion, fechaDeNacimiento);
+        String direccion = scanner.nextLine();
+    
+        // Crea un nuevo objeto Empleado con la información proporcionada
+        Empleado nuevoEmpleado = new Empleado(nombre, apellidoPaterno, apellidoMaterno, correo, numero, direccion, fechaDeNacimiento);
+    
+        // Escribe los datos del nuevo empleado en un archivo
         EscritorDeArchivos.escribirEmpleado(nuevoEmpleado);
+    
+        // Agrega el nuevo empleado a la lista de empleados
         losEmpleados.add(nuevoEmpleado);
+    
+        // Limpia la pantalla y muestra un mensaje de éxito
         Utilidades.limpPantalla();
         System.out.println("Se ha registrado un empleado");
-        try{
+    
+        // Espera 5 segundos antes de continuar (para dar tiempo al usuario de leer el mensaje)
+        try {
             Thread.sleep(5000);
-        }catch(InterruptedException e){
+        } catch (InterruptedException e) {
             System.out.println(e);
         }
-    }
+}
 
+
+    // Método para asignar un servicio a un empleado.
     public void asignarServicioAEmpleado(ArrayList<Empleado> losEmpleados){
         int contador = 0;
         int indice,indiceEmpleado;
