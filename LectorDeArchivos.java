@@ -595,11 +595,37 @@ public class LectorDeArchivos {
         return precioTotal;
     }
 
-    public static void llenarArraylistServicios(ArrayList<Servicio> losServicios){
-        ArrayList<Cliente> losClientes = new ArrayList<>();
-        LectorDeArchivos.llenarArraylistClientes(losClientes);
-        ArrayList<Mascota> lasMascotas = new ArrayList<>();
-        LectorDeArchivos.llenarArraylistMascotas(lasMascotas);
-        
+    public static void llenarArraylistServicios(ArrayList<Servicio> servicios){
+        try{
+            String nombreDelCliente, nombreDeLaMascota;
+            File archivoServicios = new File("RegistroServicios.txt");
+            FileReader lector = new FileReader(archivoServicios);
+            BufferedReader bufferEntrada = new BufferedReader(lector);
+            String lineaLeida = bufferEntrada.readLine();
+            ArrayList<Cliente> objetosCliente = new ArrayList<>();
+            LectorDeArchivos.llenarArraylistClientes(objetosCliente);
+            while(lineaLeida != null){
+                Servicio actual = new Servicio();
+                StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
+                int datos = particion.countTokens();
+                for(int i = 0; i <= datos; i++){
+                    if(i == 0){
+                        actual.setTipoDeServicio(particion.nextToken());
+                    } else if (i == 1) {
+                        nombreDelCliente = particion.nextToken();
+                    }else if(i == 2){
+                        nombreDeLaMascota = particion.nextToken();
+                    }else if (i == 3){
+                        float precio = Float.parseFloat(particion.nextToken());
+                        actual.setCostoDelServicio(precio);
+                    }
+                }
+                servicios.add(actual);
+                lineaLeida = bufferEntrada.readLine();
+            }
+            bufferEntrada.close();
+        } catch (IOException e){
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }
