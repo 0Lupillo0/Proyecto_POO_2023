@@ -389,7 +389,6 @@ public class LectorDeArchivos {
                 int datos = particion.countTokens();
                 for(int i = 0; i < datos; i++){
                     precios[i] = particion.nextToken();
-
                     if(precios[0].equalsIgnoreCase(tamanioBuscado)){
                         System.out.pritnln(precios[i+1]);
                     }
