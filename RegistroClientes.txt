@@ -3,3 +3,4 @@ cliente:Samuel:Ortiz:Dias:20:samuel.ortiz@gmail.com:5532687410:Calle Pizza 2:sam
 cliente:Jhonatan:Amaya:Esquivel:20:correo@correo.com:111222333444:Mi direccion:JhonFox45:contrase�a
 cliente:luis:Perez:Perez:24:correo@correo.com:56319126331:direccion direccion :Luis123:contrase�a2
 cliente:Juantio:Juan:Ito:99:correo@correo.com:51511626:direccion:JuanIto55:juanPro123
+cliente:Jose:Bb:Mm:39:pppp:9292983838:por alla:lupillo:1234
