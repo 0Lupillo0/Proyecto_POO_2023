@@ -10,6 +10,7 @@ public class Utilidades {
     public static Scanner scanner = new Scanner(System.in);
     public static ArrayList<Cliente> clientes = new ArrayList<>();
     public static ArrayList<Administrador> administradores = new ArrayList<>();
+    //public static ArrayList<Empleado> empleados = new ArrayList<>(); //De momento no se usa pero hay que ver
     /**
      * Este método imprime el menu principal de la aplicación.
      * @return Valor entero para la sentencia switch que sigue a la llamada al método.

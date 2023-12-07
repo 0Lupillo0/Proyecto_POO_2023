@@ -30,27 +30,16 @@ public class Administrador extends Usuario{
         Empleado nuevoEmpleado = new Empleado(nombre, apellidoPaterno, apellidoMaterno, correo, numero, direcion, fechaDeNacimiento);
         EscritorDeArchivos.escribirEmpleado(nuevoEmpleado);
         losEmpleados.add(nuevoEmpleado);
+        Utilidades.limpPantalla();
         System.out.println("Se ha registrado un empleado");
         try{
-            Thread.sleep(500);
+            Thread.sleep(5000);
         }catch(InterruptedException e){
             System.out.println(e);
         }
-        scanner.close();
     }
 
-    public void asignarServicio(Empleado elEmpleado){
-        Scanner scanner = new Scanner(System.in);
-        String tipoDeServicio = new String();
-
-        System.out.println("---- ASIGNAR SERVICIO A EMPLEADO ----");
-        System.out.println("Tipo de servicio:");
-        tipoDeServicio = scanner.nextLine();
-        System.out.println("Mascota asignada:");
-
-        //Jala un servicio de Historial de Servicios.txt y lo elimina del archivo
-        Servicio servicioAsignado.encontrarServicio();
-        //Asigna el servicio al empleado
-        elEmpleado.setServicioActual(servicioAsignado);
+    public void asignarServicioAEmpleado(ArrayList<Empleado> losEmpleados){
+        //Debe asignarle un servicio a un empleado 
     }
 }
