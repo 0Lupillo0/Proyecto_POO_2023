@@ -138,26 +138,14 @@ public class EscritorDeArchivos {
     }
 
     public static void escribirServicio(Servicio elServicio){
-        try{
-            File archivo = new File("RegistroServicios.txt");
-            FileWriter escritor = new FileWriter(archivo,true);
-            PrintWriter objetoEscritor = new PrintWriter(escritor);
-            String cadena = new String();
-            Cliente elCliente = elServicio.getElCliente();
-            Mascota laMascota = elServicio.getLaMascota();
-            String tipoDeServicio = elServicio.getTipoDeServicio();
-            cadena = cadena + tipoDeServicio + ":";
-            String nicknameCliente = elCliente.getNickname();
-            cadena = cadena + nicknameCliente + ":";
-            String nombreMascota = laMascota.getNombre();
-            cadena = cadena + nombreMascota + ":";
-            float costoDelServicio = elServicio.getCostoDelServicio();
-            cadena = cadena + costoDelServicio;
-            objetoEscritor.println(cadena);
-            objetoEscritor.close();
-        }
-        catch(IOException e){
-            System.out.println(e.toString());
+        String historialDeServicios = "HistorialDeServicios.txt";
+        
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(historialDeServicios))) {
+            // Escribir el objeto en el archivo
+            File historialDeServicios = new File("HistorialDeServicios.txt");
+            oos.writeObject(elServicio);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

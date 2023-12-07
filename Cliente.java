@@ -110,6 +110,10 @@ public class Cliente extends Usuario{
                    System.out.println("Tipo de pelo: " + perro.getTipoDePelo());
                    System.out.println("Altura: " + perro.getAltura());
                    System.out.println("Lista de precios para perro " + perro.getAltura().toLowerCase());
+                   LectorDeArchivos.leerPreciosBanioPerro();
+                   LectorDeArchivos.leerPreciosDentalPerro();
+                   LectorDeArchivos.leerPreciosUniasPerro();
+                   LectorDeArchivos.leerPreciosPeloPerro();
                    if(perro.getAltura().equalsIgnoreCase("Miniatura")){
 
                    }
@@ -117,8 +121,10 @@ public class Cliente extends Usuario{
                    System.out.println("Nombre: " + eleccion.getNombre());
                    System.out.println("Edad: " + eleccion.getEdad());
                    System.out.println("Tipo de pelo: " + eleccion.getTipoDePelo());
+                   System.out.println("Lista de precios para gato");
                }
            }
+
        }
     }
 
