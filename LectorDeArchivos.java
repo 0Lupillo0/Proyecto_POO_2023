@@ -7,7 +7,7 @@ public class LectorDeArchivos {
     public static boolean buscaNickPassClientes(String nickname, String password){
         boolean encontradoClientes = false;
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\RegistroClientes.txt");
+            File archivoClientes = new File("RegistroClientes.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -34,7 +34,7 @@ public class LectorDeArchivos {
     public static boolean buscaNickPassAdmins(String nickname, String password){
         boolean encontradoAdmins = false;
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\RegistroAdministradores.txt");
+            File archivoClientes = new File("RegistroAdministradores.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -60,7 +60,7 @@ public class LectorDeArchivos {
 
     public static void llenarArraylistClientes(ArrayList<Cliente> clientes){
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\RegistroClientes.txt");
+            File archivoClientes = new File("RegistroClientes.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -94,14 +94,15 @@ public class LectorDeArchivos {
                 clientes.add(actual);
                 lineaLeida = bufferEntrada.readLine();
             }
+            bufferEntrada.close();
         } catch (IOException e){
             System.out.println("Error: " + e.getMessage());
         }
     }
-    
+
     public static void llenarArraylistAdministradores(ArrayList<Administrador> losAdmins){
         try{
-            File archivoClientes = new File("src/RegistroAdministradores.txt");
+            File archivoClientes = new File("RegistroAdministradores.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -143,7 +144,7 @@ public class LectorDeArchivos {
         
     public static void llenarArraylistEmpleados(ArrayList<Empleado> losEmpleados){
         try{
-            File archivoClientes = new File("src/RegistroEmpleados.txt");
+            File archivoClientes = new File("RegistroEmpleados.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -176,11 +177,12 @@ public class LectorDeArchivos {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
     public static void leerPreciosBanioPerro(){
         System.out.println("----------------------Precios Baño----------------------------");
         System.out.println("|Tamaño|Precio Base|Sin pelo|Pelo corto|Pelo medio|Pelo largo|");
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\PrecioBaniosPerro.txt");
+            File archivoClientes = new File("PrecioBaniosPerro.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -193,6 +195,7 @@ public class LectorDeArchivos {
                 System.out.println();
                 lineaLeida = bufferEntrada.readLine();
             }
+            bufferEntrada.close();
         }catch (IOException e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -202,7 +205,7 @@ public class LectorDeArchivos {
         System.out.println("--------------Precios Corte de Pelo---------------");
         System.out.println("|Tamaño|Sin pelo|Pelo corto|Pelo medio|Pelo largo|");
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\PrecioPeloPerro.txt");
+            File archivoClientes = new File("PrecioPeloPerro.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -215,6 +218,7 @@ public class LectorDeArchivos {
                 System.out.println();
                 lineaLeida = bufferEntrada.readLine();
             }
+            bufferEntrada.close();
         }catch(IOException e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -224,7 +228,7 @@ public class LectorDeArchivos {
         System.out.println("--------------Precios Corte de Uñas---------------");
         System.out.println("|Tamaño|Precio|");
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\PrecioUniaPerro.txt");
+            File archivoClientes = new File("PrecioUniaPerro.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -237,6 +241,7 @@ public class LectorDeArchivos {
                 System.out.println();
                 lineaLeida = bufferEntrada.readLine();
             }
+            bufferEntrada.close();
         }catch(IOException e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -246,7 +251,7 @@ public class LectorDeArchivos {
         System.out.println("--------------Precios Cepillado Dental---------------");
         System.out.println("|Tamaño|Precio|");
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\PrecioDentalPerro.txt");
+            File archivoClientes = new File("PrecioDentalPerro.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -259,6 +264,7 @@ public class LectorDeArchivos {
                 System.out.println();
                 lineaLeida = bufferEntrada.readLine();
             }
+            bufferEntrada.close();
         }catch(IOException e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -268,7 +274,7 @@ public class LectorDeArchivos {
         System.out.println("--------------Precios Baño---------------");
         System.out.println("|Precio base|Sin pelo|Pelo corto|Pelo largo");
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\PrecioBaniosGato.txt");
+            File archivoClientes = new File("PrecioBaniosGato.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -281,6 +287,7 @@ public class LectorDeArchivos {
                 System.out.println();
                 lineaLeida = bufferEntrada.readLine();
             }
+            bufferEntrada.close();
         }catch(IOException e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -289,7 +296,7 @@ public class LectorDeArchivos {
     public static void leerPrecioUniasGato(){
         System.out.println("-----Precio Corte de Uñas-----");
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\PrecioUniaGato.txt");
+            File archivoClientes = new File("PrecioUniaGato.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -302,6 +309,7 @@ public class LectorDeArchivos {
                 System.out.println();
                 lineaLeida = bufferEntrada.readLine();
             }
+            bufferEntrada.close();
         }catch(IOException e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -310,7 +318,7 @@ public class LectorDeArchivos {
     public static void leerPrecioDentalGato(){
         System.out.println("-----Precio Cepillado Dental-----");
         try{
-            File archivoClientes = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\PrecioDentalGato.txt");
+            File archivoClientes = new File("PrecioDentalGato.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
             String lineaLeida = bufferEntrada.readLine();
@@ -323,6 +331,7 @@ public class LectorDeArchivos {
                 System.out.println();
                 lineaLeida = bufferEntrada.readLine();
             }
+            bufferEntrada.close();
         }catch(IOException e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -330,7 +339,7 @@ public class LectorDeArchivos {
 
     public static void cargarMascotasParaCliente(ArrayList<Cliente> clientes) {
         try {
-            File archivoMascotas = new File("C:\\Users\\nicol\\OneDrive\\Imágenes\\Escritorio\\ArchivosAuxiliaresPruebasProyecto\\RegistroMascotas.txt");
+            File archivoMascotas = new File("RegistroMascotas.txt");
             FileReader lectorMascotas = new FileReader(archivoMascotas);
             BufferedReader bufferEntradaMascotas = new BufferedReader(lectorMascotas);
             String lineaMascota = bufferEntradaMascotas.readLine();
@@ -367,6 +376,5 @@ public class LectorDeArchivos {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
 }
 
