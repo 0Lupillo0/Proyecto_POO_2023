@@ -1,34 +1,29 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Clase que representa a un cliente en el sistema.
- * Extiende la clase abstracta Usuario.
- */
-public class Cliente extends Usuario {
-    // Saldo en la cuenta del cliente
+public class Cliente extends Usuario{
     private float cuenta;
-    // Lista de mascotas asociadas al cliente
     private ArrayList<Mascota> mascotas;
+    Scanner scanner = new Scanner(System.in);
+    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, int edad, String mail, String numeroCelular, String direccion, String nickname, String password){
+        super(nombre, apellidoPaterno, apellidoMaterno, edad, mail, numeroCelular, direccion, nickname, password);
+        this.cuenta = 0.0f;
+        this.mascotas = new ArrayList<>();
+    }
+
     public Cliente(){
         super();
         this.cuenta = 0.0f;
         this.mascotas = new ArrayList<>();
     }
 
-/**
- * Método para registrar una nueva mascota asociada al cliente.
- * Solicita al usuario ingresar la información de la mascota, ya sea un perro o un gato,
- * y la agrega a la lista de mascotas del cliente.
- */
-public void registrarUnaMascota() {
-    boolean mascotaValida = false;
-    // Ciclo para asegurarse de que se registre una mascota válida
-    while (!mascotaValida) {
-        System.out.println("----REGISTRAR MASCOTA----");
-        System.out.println("Ingrese qué desea registrar: Perro - Gato");
-        String tipoDeMascota = scanner.nextLine();
-
+    public void registrarUnaMascota(){
+        boolean mascotaValida = false;
+        while(!mascotaValida){
+            System.out.println("----REGISTRAR MASCOTA----");
+            System.out.println("Ingrese que desea registrar:");
+            System.out.println("Perro - Gato");
+            String tipoDeMascota = scanner.nextLine();
             if(tipoDeMascota.equalsIgnoreCase("Perro")){
                 mascotaValida = true;
                 System.out.println("----PERRO----");
@@ -148,6 +143,8 @@ public void registrarUnaMascota() {
                    EscritorDeArchivos.escribirServicio(elServicio);
                    Utilidades.limpPantalla();
                    System.out.println("Servicio registrado con exito.");
+                   mascotas.clear();
+
 
                } else if (eleccion instanceof Gato) {
                    Gato gato = (Gato)eleccion;
@@ -182,7 +179,7 @@ public void registrarUnaMascota() {
                    EscritorDeArchivos.escribirServicio(elServicio);
                    Utilidades.limpPantalla();
                    System.out.println("Servicio registrado con exito.");
-                   
+                   mascotas.clear();
                }
            }
 
