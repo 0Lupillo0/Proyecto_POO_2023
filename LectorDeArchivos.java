@@ -596,6 +596,10 @@ public class LectorDeArchivos {
     }
 
     public static void llenarArraylistServicios(ArrayList<Servicio> losServicios){
-        //Ahorita lo llenamos
+        ArrayList<Cliente> losClientes = new ArrayList<>();
+        LectorDeArchivos.llenarArraylistClientes(losClientes);
+        ArrayList<Mascota> lasMascotas = new ArrayList<>();
+        LectorDeArchivos.llenarArraylistMascotas(lasMascotas);
+        
     }
 }

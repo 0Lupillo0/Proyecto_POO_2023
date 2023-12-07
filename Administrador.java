@@ -45,13 +45,6 @@ public class Administrador extends Usuario{
         System.out.println("----- ASIGNACION DE SERVICIOS -----");
         ArrayList<Servicio> losServicios = new ArrayList<>();
         LectorDeArchivos.llenarArraylistServicios(losServicios);
-        //Bloque de prueba
-        Cliente c = new Cliente("Manolo", "Mano", "Lito", 25, "correo@correo.com", "265656595", "carretera bla bla", "Manolo5", "jajaxd");
-        Mascota gato = new Gato("Manolito", 5, "Pelo corto");
-        //Mascota perro = new Perro("Manolito", 5, "Pelo Corto", "Mediana");
-        Servicio sa = new Servicio("Banio", gato, c, 55.58f);
-        losServicios.add(sa);
-        //Bloque de prueba
         if(losServicios.isEmpty()){
             Utilidades.limpPantalla();
             System.out.println("No hay servicios pendientes");
