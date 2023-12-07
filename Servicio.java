@@ -34,6 +34,19 @@ public class Servicio {
     public float getCostoDelServicio(){
         return costoDelServicio;
     }
-    //Busca el servicio dentro del archivo de servicios
 
+    public void impInfoDelServicio(){
+        System.out.println("-----DATOS DEL SERVICIO-----");
+        System.out.println("Nombre del cliente:"+elCliente.getNombre()+" "+elCliente.getApellidoPaterno()+" "+elCliente.getApellidoMaterno());
+        System.out.println("Nombre de la mascota:"+laMascota.getNombre());
+        System.out.println("Edad de la mascota:"+laMascota.getEdad());
+        System.out.println("Largo del pelo"+laMascota.getTipoDePelo());
+        if(laMascota instanceof Perro){
+            System.out.println("Tipo de mascota:Perro");
+            System.out.println("Altura:"+((Perro)laMascota).getAltura());
+        }else if(laMascota instanceof Gato){
+            System.out.println("Tipo de mascota:Gato");
+        }
+    }
+    //Busca el servicio dentro del archivo de servicios
 }
