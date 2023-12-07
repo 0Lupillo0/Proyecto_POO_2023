@@ -1,10 +1,13 @@
 import java.io.*;
 public class EscritorDeArchivos {
+        // Método para escribir información de un Cliente en "RegistroClientes.txt"
     public static void escribirCliente(Cliente cliente){
         try{
             File archivo = new File("RegistroClientes.txt");
             FileWriter escritor = new FileWriter(archivo, true);
             PrintWriter objetoEscritor = new PrintWriter(escritor);
+             
+            // Se construye la cadena con el formato "cliente:nombre:apellidoPaterno:..."
             String cadena = "cliente:";
             String nombre = cliente.getNombre();
             cadena = cadena + nombre + ":";
@@ -31,60 +34,71 @@ public class EscritorDeArchivos {
         }
     }
 
+    /**
+     * Escribe la información de un administrador en el archivo "RegistroAdministradores.txt".
+     *
+     * @param administrador Objeto Administrador que contiene la información del administrador a registrar.
+     */
     public static void escribirAdministrador(Administrador administrador){
-        try{
+        try {
             File archivo = new File("RegistroAdministradores.txt");
             FileWriter escritor = new FileWriter(archivo, true);
+            // Se crea un objeto PrintWriter para escribir en el archivo
             PrintWriter objetoEscritor = new PrintWriter(escritor);
+
+            // Se construye la cadena con el formato "administrador:nombre:apellidoPaterno:..."
             String cadena = "administrador:";
-            String nombre = administrador.getNombre();
-            cadena = cadena + nombre + ":";
-            String apellidoPaterno = administrador.getApellidoPaterno();
-            cadena = cadena + apellidoPaterno + ":";
-            String apellidoMaterno = administrador.getApellidoMaterno();
-            cadena = cadena + apellidoMaterno + ":";
-            int edad = administrador.getEdad();
-            cadena = cadena + edad + ":";
-            String mail = administrador.getMail();
-            cadena = cadena + mail + ":";
-            String numeroCelular = administrador.getNumeroCelular();
-            cadena = cadena + numeroCelular + ":";
-            String direccion = administrador.getDireccion();
-            cadena = cadena + direccion + ":";
-            String nickname = administrador.getNickname();
-            cadena = cadena + nickname + ":";
-            String password = administrador.getPassword();
-            cadena =  cadena + password;
+            cadena = cadena + administrador.getNombre() + ":";
+            cadena = cadena + administrador.getApellidoPaterno() + ":";
+            cadena = cadena + administrador.getApellidoMaterno() + ":";
+            cadena = cadena + administrador.getEdad() + ":";
+            cadena = cadena + administrador.getMail() + ":";
+            cadena = cadena + administrador.getNumeroCelular() + ":";
+            cadena = cadena + administrador.getDireccion() + ":";
+            cadena = cadena + administrador.getNickname() + ":";
+            cadena = cadena + administrador.getPassword();
+
+            // Se escribe la cadena en el archivo y se cierra el recurso
             objetoEscritor.println(cadena);
             objetoEscritor.close();
         } catch(IOException e){
+            // Se imprime un mensaje de error en caso de excepción de E/S
             System.out.println("Error: " + e.getMessage());
         }
     }
 
+
+        /**
+     * Escribe la información de un perro y su dueño en el archivo "RegistroMascotas.txt".
+     * @param perro         Objeto Perro que contiene la información del perro a registrar.
+     * @param nicknameDuenio Nickname del dueño del perro.
+     */
     public static void escribirPerro(Perro perro, String nicknameDuenio){
-        try{
+        try {
+            // Se crea un nuevo archivo o se abre existente en modo de escritura (append)
             File archivo = new File("RegistroMascotas.txt");
-            FileWriter escritor = new FileWriter(archivo,true);
+            FileWriter escritor = new FileWriter(archivo, true);
+            // Se crea un objeto PrintWriter para escribir en el archivo
             PrintWriter objetoEscritor = new PrintWriter(escritor);
+
+            // Se construye la cadena con el formato "nicknameDuenio:perro:nombreDelPerro:edad:tipoDePelo:altura"
             String cadena = nicknameDuenio + ":";
             cadena = cadena + "perro:";
-            String nombreDelPerro = perro.getNombre();
-            cadena = cadena + nombreDelPerro + ":";
-            int edad = perro.getEdad();
-            cadena = cadena + edad + ":";
-            String tipoDePelo = perro.getTipoDePelo();
-            cadena = cadena + tipoDePelo + ":";
-            String altura = perro.getAltura();
-            cadena = cadena + altura;
+            cadena = cadena + perro.getNombre() + ":";
+            cadena = cadena + perro.getEdad() + ":";
+            cadena = cadena + perro.getTipoDePelo() + ":";
+            cadena = cadena + perro.getAltura();
 
+            // Se escribe la cadena en el archivo y se cierra el recurso
             objetoEscritor.println(cadena);
             objetoEscritor.close();
         }
         catch(IOException e){
+            // Se imprime un mensaje de error en caso de excepción de E/S
             System.out.println(e.toString());
         }
     }
+
 
     public static void escribirGato(Gato gato, String nicknameDuenio){
         try{
@@ -99,7 +113,8 @@ public class EscritorDeArchivos {
             cadena = cadena + edad + ":";
             String tipoDePelo = gato.getTipoDePelo();
             cadena = cadena + tipoDePelo;
-
+            
+            // Se escribe la cadena en el archivo y se cierra el recurso
             objetoEscritor.println(cadena);
             objetoEscritor.close();
         }
@@ -137,26 +152,31 @@ public class EscritorDeArchivos {
         }
     }
 
+      /**
+     * Escribe la información de un servicio en el archivo "RegistroServicios.txt".
+     *
+     * @param elServicio Objeto Servicio que contiene la información del servicio a registrar.
+     */
     public static void escribirServicio(Servicio elServicio){
-        try{
+        try {
+            // Se crea un nuevo archivo o se abre existente en modo de escritura (append)
             File archivo = new File("RegistroServicios.txt");
-            FileWriter escritor = new FileWriter(archivo,true);
+            FileWriter escritor = new FileWriter(archivo, true);
+            // Se crea un objeto PrintWriter para escribir en el archivo
             PrintWriter objetoEscritor = new PrintWriter(escritor);
-            String cadena = new String();
-            Cliente elCliente = elServicio.getElCliente();
-            Mascota laMascota = elServicio.getLaMascota();
-            String tipoDeServicio = elServicio.getTipoDeServicio();
-            cadena = cadena + tipoDeServicio + ":";
-            String nicknameCliente = elCliente.getNickname();
-            cadena = cadena + nicknameCliente + ":";
-            String nombreMascota = laMascota.getNombre();
-            cadena = cadena + nombreMascota + ":";
-            float costoDelServicio = elServicio.getCostoDelServicio();
-            cadena = cadena + costoDelServicio;
+
+            // Se construye la cadena con el formato "tipoDeServicio:nicknameCliente:nombreMascota:costoDelServicio"
+            String cadena = "";
+            cadena = cadena + elServicio.getTipoDeServicio() + ":";
+            cadena = cadena + elServicio.getElCliente().getNickname() + ":";
+            cadena = cadena + elServicio.getLaMascota().getNombre() + ":";
+            cadena = cadena + elServicio.getCostoDelServicio();
+
+            // Se escribe la cadena en el archivo y se cierra el recurso
             objetoEscritor.println(cadena);
             objetoEscritor.close();
-        }
-        catch(IOException e){
+        } catch(IOException e){
+            // Se imprime un mensaje de error en caso de excepción de E/S
             System.out.println(e.toString());
         }
     }
