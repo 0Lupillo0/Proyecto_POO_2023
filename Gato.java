@@ -6,4 +6,8 @@ public class Gato extends Mascota{
     public Gato(){
         super();
     }
+
+    public void maullar(){
+        System.out.println("Miauu Miauu");
+    }
 }

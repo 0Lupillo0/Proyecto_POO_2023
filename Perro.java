@@ -17,4 +17,8 @@ public class Perro extends Mascota{
     public void setAltura(String altura) {
         this.altura = altura;
     }
+
+    public void ladrar(){
+        System.out.println("Guauu Guauu");
+    }
 }
