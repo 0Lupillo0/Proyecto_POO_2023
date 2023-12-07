@@ -4,6 +4,13 @@ import java.util.StringTokenizer;
 
 
 public class LectorDeArchivos {
+
+    /**
+     * Busca un cliente en el archivo "RegistroClientes.txt" por su nombre de usuario (nickname) y contraseña.
+     * @param nickname Nombre de usuario del cliente.
+     * @param password Contraseña del cliente.
+     * @return true si el cliente es encontrado, false en caso contrario.
+     */
     public static boolean buscaNickPassClientes(String nickname, String password){
         boolean encontradoClientes = false;
         try{
@@ -31,32 +38,56 @@ public class LectorDeArchivos {
         return encontradoClientes;
     }
 
-    public static boolean buscaNickPassAdmins(String nickname, String password){
+    /**
+     * Busca un administrador por su nickname y password en el archivo "RegistroAdministradores.txt".
+     * @param nickname El nickname del administrador a buscar.
+     * @param password La contraseña del administrador a buscar.
+     * @return true si se encuentra un administrador con las credenciales dadas, false de lo contrario.
+     */
+    public static boolean buscaNickPassAdmins(String nickname, String password) {
+        // Variable para indicar si se encontró un administrador con las credenciales dadas.
         boolean encontradoAdmins = false;
-        try{
+
+        try {
+            // Se crea un objeto File para el archivo de administradores.
             File archivoClientes = new File("RegistroAdministradores.txt");
+
+            // Se crean objetos FileReader y BufferedReader para leer el archivo.
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
+
+            // Se lee la primera línea del archivo.
             String lineaLeida = bufferEntrada.readLine();
-            while(lineaLeida != null){
+
+            // Se recorre cada línea del archivo.
+            while (lineaLeida != null) {
+                // Se crea un array de Strings para almacenar los datos de la línea actual.
                 String[] datos = new String[10];
+
+                // Se utiliza StringTokenizer para dividir la línea en partes usando el delimitador ":".
                 int i = 0;
                 StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
-                while(particion.hasMoreTokens()){
+                while (particion.hasMoreTokens()) {
                     datos[i] = particion.nextToken();
                     i++;
                 }
-                if(datos[8].equalsIgnoreCase(nickname) && datos[9].equalsIgnoreCase(password)){
+
+                // Se compara el nickname y password con los datos de la línea actual.
+                if (datos[8].equalsIgnoreCase(nickname) && datos[9].equalsIgnoreCase(password)) {
+                    // Se marca como encontrado si las credenciales coinciden.
                     encontradoAdmins = true;
                 }
+                // Se lee la siguiente línea del archivo.
                 lineaLeida = bufferEntrada.readLine();
             }
             bufferEntrada.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
+        // Se retorna el resultado de la búsqueda.
         return encontradoAdmins;
     }
+
 
     public static void llenarArraylistClientes(ArrayList<Cliente> clientes){
         try{
@@ -100,22 +131,38 @@ public class LectorDeArchivos {
         }
     }
 
-    public static void llenarArraylistAdministradores(ArrayList<Administrador> losAdmins){
-        try{
+    /**
+     * Lee el archivo "RegistroAdministradores.txt" y llena un ArrayList de objetos Administrador con la información de los administradores.
+     * @param losAdmins ArrayList que se llenará con objetos Administrador.
+     */
+    public static void llenarArraylistAdministradores(ArrayList<Administrador> losAdmins) {
+        try {
+            // Se crea un objeto File para el archivo de administradores.
             File archivoClientes = new File("RegistroAdministradores.txt");
+
+            // Se crean objetos FileReader y BufferedReader para leer el archivo.
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
+
+            // Se lee la primera línea del archivo.
             String lineaLeida = bufferEntrada.readLine();
-            while(lineaLeida != null){
+
+            // Se recorre cada línea del archivo.
+            while (lineaLeida != null) {
+                // Se crea un objeto Administrador para almacenar la información de la línea actual.
                 Administrador actual = new Administrador();
+
+                // Se utiliza StringTokenizer para dividir la línea en partes usando el delimitador ":".
                 StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
+
+                // Se recorren las partes y se asignan los valores correspondientes al objeto Administrador.
                 int datos = particion.countTokens();
-                for(int i = 0; i <= datos; i++){
-                    if(i == 0){
+                for (int i = 0; i <= datos; i++) {
+                    if (i == 0) {
                         particion.nextToken();
                     } else if (i == 1) {
                         actual.setNombre(particion.nextToken());
-                    } else if (i == 2){
+                    } else if (i == 2) {
                         actual.setApellidoPaterno(particion.nextToken());
                     } else if (i == 3) {
                         actual.setApellidoMaterno(particion.nextToken());
@@ -123,25 +170,33 @@ public class LectorDeArchivos {
                         actual.setEdad(Integer.parseInt(particion.nextToken()));
                     } else if (i == 5) {
                         actual.setMail(particion.nextToken());
-                    } else if (i == 6){
+                    } else if (i == 6) {
                         actual.setNumeroCelular(particion.nextToken());
                     } else if (i == 7) {
                         actual.setDireccion(particion.nextToken());
-                    } else if(i == 8){
+                    } else if (i == 8) {
                         actual.setNickname(particion.nextToken());
                     } else if (i == 9) {
                         actual.setPassword(particion.nextToken());
                     }
                 }
+
+                // Se añade el objeto Administrador al ArrayList.
                 losAdmins.add(actual);
+
+                // Se lee la siguiente línea del archivo.
                 lineaLeida = bufferEntrada.readLine();
             }
+
+            // Se cierra el BufferedReader.
             bufferEntrada.close();
-        } catch (IOException e){
+        } catch (IOException e) {
+            // Se maneja la excepción de entrada/salida imprimiendo un mensaje de error.
             System.out.println("Error: " + e.getMessage());
         }
     }
-        
+
+
     public static void llenarArraylistEmpleados(ArrayList<Empleado> losEmpleados){
         try{
             File archivoClientes = new File("RegistroEmpleados.txt");
@@ -293,50 +348,84 @@ public class LectorDeArchivos {
         }
     }
 
-    public static void leerPrecioUniasGato(){
+    /**
+     * Lee y muestra los precios para el corte de uñas de gatos desde el archivo "PrecioUniaGato.txt".
+     */
+    public static void leerPrecioUniasGato() {
+        // Mensaje informativo para indicar la sección de precios para el corte de uñas.
         System.out.println("-----Precio Corte de Uñas-----");
-        try{
+
+        try {
             File archivoClientes = new File("PrecioUniaGato.txt");
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
+
+            // Se lee la primera línea del archivo.
             String lineaLeida = bufferEntrada.readLine();
-            while(lineaLeida != null){
+
+            // Se recorre cada línea del archivo.
+            while (lineaLeida != null) {
+                // Se utiliza StringTokenizer para dividir la línea en partes usando el delimitador ":".
                 StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
+                // Se cuenta el número de tokens en la línea.
                 int datos = particion.countTokens();
-                for(int i = 0; i < datos; i++){
+                // Se recorre cada token e imprime en formato de tabla.
+                for (int i = 0; i < datos; i++) {
                     System.out.print("|" + particion.nextToken() + "|");
                 }
+                // Se imprime una nueva línea después de cada línea del archivo.
                 System.out.println();
                 lineaLeida = bufferEntrada.readLine();
             }
             bufferEntrada.close();
-        }catch(IOException e){
+        } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
-    public static void leerPrecioDentalGato(){
+
+    /**
+     * Lee y muestra los precios de cepillado dental para gatos desde el archivo "PrecioDentalGato.txt".
+     */
+    public static void leerPrecioDentalGato() {
         System.out.println("-----Precio Cepillado Dental-----");
-        try{
+        try {
+            // Se crea un objeto File para el archivo de precios de cepillado dental de gatos.
             File archivoClientes = new File("PrecioDentalGato.txt");
+
+            // Se crean objetos FileReader y BufferedReader para leer el archivo.
             FileReader lector = new FileReader(archivoClientes);
             BufferedReader bufferEntrada = new BufferedReader(lector);
+
+            // Se lee la primera línea del archivo.
             String lineaLeida = bufferEntrada.readLine();
-            while(lineaLeida != null){
+
+            // Se recorre cada línea del archivo.
+            while (lineaLeida != null) {
+                // Se utiliza StringTokenizer para dividir la línea en partes usando el delimitador ":".
                 StringTokenizer particion = new StringTokenizer(lineaLeida, ":");
+                // Se cuenta el número de tokens en la línea.
                 int datos = particion.countTokens();
-                for(int i = 0; i < datos; i++){
+                // Se recorre cada token e imprime en formato de tabla.
+                for (int i = 0; i < datos; i++) {
                     System.out.print("|" + particion.nextToken() + "|");
                 }
+                // Se imprime una nueva línea después de cada línea del archivo.
                 System.out.println();
+                // Se lee la siguiente línea del archivo.
                 lineaLeida = bufferEntrada.readLine();
             }
             bufferEntrada.close();
-        }catch(IOException e){
+        } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
+
+    /**
+     * Lee el archivo "RegistroMascotas.txt" y asigna las mascotas correspondientes a cada cliente en el ArrayList de clientes.
+     * @param clientes ArrayList de clientes.
+     */
     public static void cargarMascotasParaCliente(ArrayList<Cliente> clientes) {
         try {
             File archivoMascotas = new File("RegistroMascotas.txt");
@@ -401,6 +490,12 @@ public class LectorDeArchivos {
         }
     }
 
+    /**
+     * Calcula y retorna el precio total de un servicio para una mascota específica, leyendo archivos de precios según el tipo de servicio y mascota.
+     * @param laMascota Mascota para la que se calculará el precio del servicio.
+     * @param tipoDeServicio Tipo de servicio (banio, pelo, unias, cepillado).
+     * @return Precio total del servicio.
+     */
     public static float buscarPrecio(Mascota laMascota, String tipoDeServicio) {
         float precioTotal = 0;
         try {
@@ -595,6 +690,10 @@ public class LectorDeArchivos {
         return precioTotal;
     }
 
+    /**
+     * Lee el archivo "RegistroServicios.txt" y llena un ArrayList de objetos Servicio con la información de los servicios realizados.
+     * @param servicios ArrayList de servicios.
+     */
     public static void llenarArraylistServicios(ArrayList<Servicio> servicios){
         try{
             String nombreDelCliente, nombreDeLaMascota;
