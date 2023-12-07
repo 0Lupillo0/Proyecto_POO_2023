@@ -46,7 +46,6 @@ public class Cliente extends Usuario{
                 System.out.println("- Gigante (80cm o más)");
                 String alturaPerro = scanner.nextLine();
                 Perro nuevoPerro = new Perro(nombrePerro, edadPerro, tipoDePeloPerro, alturaPerro);
-                getMascotas().add(nuevoPerro);
                 String nicknameDuenio = getNickname();
                 EscritorDeArchivos.escribirPerro(nuevoPerro, nicknameDuenio);
 
@@ -64,7 +63,6 @@ public class Cliente extends Usuario{
                 System.out.println("Pelo largo(Ej.Persa, Angora, Him).");
                 String tipoDePeloGato = scanner.nextLine();
                 Gato nuevoGato = new Gato(nombreGato, edadGato, tipoDePeloGato);
-                getMascotas().add(nuevoGato);
                 String nicknameDuenio = getNickname();
                 EscritorDeArchivos.escribirGato(nuevoGato, nicknameDuenio);
             } else{
